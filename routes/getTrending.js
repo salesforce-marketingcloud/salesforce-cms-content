@@ -7,7 +7,7 @@ var apiKey = process.env.apikey;
 var rating = process.env.rating || "g";
 var limit = process.env.limit || "50";
 
-let client = GphApiClient(apiKey);
+//let client = GphApiClient(apiKey);
 
 cmsContent = [];
 
