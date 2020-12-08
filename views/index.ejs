@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<% include partials/header %>
+
+<body class="slds-m-around_small">
+  <% include partials/blockTitle %>
+  <div id="block-container">
+    <div class="slds-text-heading_medium">Image Configuration</div>
+    <% include partials/imageLink %>
+    <% include partials/imageSliders %>
+    <% include partials/imageSettings %>
+    <hr />
+    <div class="slds-text-heading_medium">Giphy Selection</div>
+    <% include partials/search %>
+    <div class="slds-form-element slds-p-top_small" id="gif-images"></div>
+  </div>
+  <script src="sfsdk/blocksdk.js"></script>
+  <script src="javascripts/main.js"></script>
+</body>
+
+</html>

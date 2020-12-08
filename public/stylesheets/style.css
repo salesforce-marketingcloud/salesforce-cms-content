@@ -1,0 +1,25 @@
+html {
+  background: #fff !important;
+}
+
+input[type="text"]
+{
+  color: #3e3e3c !important;
+  font-weight: 400 !important;
+  font-size: 0.8125rem !important;
+}
+
+textarea {
+color: #3e3e3c !important;
+font-weight: 400 !important;
+font-size: 0.8125rem !important;
+}
+
+::placeholder {
+color: #3e3e3c !important;
+font-weight: 400 !important;
+font-size: 0.8125rem!important;
+}
+
+.grow { transition: all .2s ease-in-out; }
+.grow:hover { transform: scale(2); }
