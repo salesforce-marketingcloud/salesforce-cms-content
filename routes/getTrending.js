@@ -36,7 +36,6 @@ router.get('/', function(req, res) {
             getCMSContent(req, res, token);
         }
     } catch (error) {
-      res.send(error);  
       console.log('Token error: '+error);
     }
     
