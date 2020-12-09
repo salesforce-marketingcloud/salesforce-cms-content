@@ -1,24 +1,23 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request');
-var GphApiClient = require('giphy-js-sdk-core');
+//var GphApiClient = require('giphy-js-sdk-core');
 
-var apiKey = process.env.apikey;
+//var apiKey = process.env.apikey;
 var rating = process.env.rating || "g";
 var limit = process.env.limit || "50";
 
 //let client = GphApiClient(apiKey);
-
-cmsContent = [];
-
-router.get('/', function(req, res) {
-  console.log('inside getJWTToken');
-  const   fs = require('fs')
+const   fs = require('fs')
     ,   privateKey = fs.readFileSync('./lib/cmsserver.key').toString('utf8')
     , jwt = require('../node_modules/salesforce-jwt-bearer-token-flow/lib/index')
   ;
 
+cmsContent = [];
 
+
+router.get('/', function(req, res) {
+  console.log('inside getJWTToken');
   var token = jwt.getToken({  
     //YOUR_CONNECTED_APP_CLIENT_ID
     iss: "3MVG9Kip4IKAZQEURQLxNTxad_Di6MhEhmmrr.wADSgoWUs7g4GMDBB_eUKA54y5vEc_0BVdZgyKqBGl_FaF4",
@@ -31,13 +30,7 @@ router.get('/', function(req, res) {
   function(err, token){
     try {
         if(token != null){
-            //res.redirect('index.html');
             console.log(token);
-            /*
-            res.send({
-                token: token
-            });
-            */
           
             getCMSContent(req, res, token);
         }
@@ -46,7 +39,7 @@ router.get('/', function(req, res) {
     }
     
   });
-  
+ 
   /*
   client.trending("gifs", {
       "limit": limit,

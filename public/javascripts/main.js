@@ -7,9 +7,12 @@ $(function() {
 });
 
 function getTrending() {
-  console.log('inside getTrending');
+  console.log('inside getTrending:');
   $.get('/getTrending/', function(data) {})
     .done(function(data) {
+      var jsonObj = JSON.parse(data);
+      console.log('url: '+jsonObj[0].url);
+      console.log(JSON.stringify(data));
       $.each(JSON.parse(data), function(key, value) {
         $("#gif-images").append('<img class="slds-p-around_xxx-small grow" sdkimg = "' + value.url + '" src="' + value.url + '" style="width:90px;height:90px;">');
       })
@@ -99,10 +102,10 @@ function setImage() {
 
   if (scale === "yes") {
     //alert('scale === yes: ');
-    sdk.setSuperContent('<div style="text-align: ' + alignment + ';"> <a href="' + link + '"><img style="width: 100%" src="' + imageurl + '" /></a></div><div style="text-align: center"><img src="https://experts-cb-sdk-giphy.herokuapp.com/images/Poweredby_100px-White_VertLogo.png"></div>'); 
+    //sdk.setSuperContent('<div style="text-align: ' + alignment + ';"> <a href="' + link + '"><img style="width: 100%" src="' + imageurl + '" /></a></div><div style="text-align: center"><img src="https://experts-cb-sdk-giphy.herokuapp.com/images/Poweredby_100px-White_VertLogo.png"></div>'); 
     sdk.setContent('<div style="text-align: ' + alignment + ';"> <a href="' + link + '"><img style="width: 100%" src="' + imageurl + '" /></a></div><div style="text-align: center"><img src="https://experts-cb-sdk-giphy.herokuapp.com/images/Poweredby_100px-White_VertLogo.png"></div>');
   } else {
-    sdk.setSuperContent('<div style="text-align: ' + alignment + ';"> <a href="' + link + '"><img style="width: 100%" src="' + imageurl + '" /></a></div><div style="text-align: center"><img src="https://experts-cb-sdk-giphy.herokuapp.com/images/Poweredby_100px-White_VertLogo.png"></div>')
+    //sdk.setSuperContent('<div style="text-align: ' + alignment + ';"> <a href="' + link + '"><img style="width: 100%" src="' + imageurl + '" /></a></div><div style="text-align: center"><img src="https://experts-cb-sdk-giphy.herokuapp.com/images/Poweredby_100px-White_VertLogo.png"></div>')
     sdk.setContent('<div style="text-align: ' + alignment + ';"> <a href="' + link + '"><img height="' + height + '" width="' + width + '" src="' + imageurl + '" /></a></div><div style="text-align: center"><img src="https://experts-cb-sdk-giphy.herokuapp.com/images/Poweredby_100px-White_VertLogo.png"></div>');
   }
 
@@ -117,6 +120,7 @@ function setImage() {
 }
 
 sdk.getData(function(data) {
+  console.log('inside getData');
   link = data.link || '';
   width = data.width || '300';
   height = data.height || '300';
