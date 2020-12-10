@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request');
+var path = require('path');
 //var GphApiClient = require('giphy-js-sdk-core');
 
 
@@ -8,21 +9,19 @@ var request = require('request');
 var rating = process.env.rating || "g";
 var limit = process.env.limit || "50";
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(403));
-});
-
-app.use(function(err, req, res, next) {
-   res.render(err.message+''+err.status);
-});
-
-
 //let client = GphApiClient(apiKey);
+const   fs = require('fs')
+    ,   privateKey = fs.readFileSync(path.join('./lib','/cmsserver.key')).toString('utf8')
+    , jwt = require(path.join('../','/node_modules/salesforce-jwt-bearer-token-flow/lib/index.js'))
+  ;
+
+/*
 const   fs = require('fs')
     ,   privateKey = fs.readFileSync('./lib/cmsserver.key').toString('utf8')
     , jwt = require('../node_modules/salesforce-jwt-bearer-token-flow/lib/index')
   ;
+
+*/
 
 cmsContent = [];
 
