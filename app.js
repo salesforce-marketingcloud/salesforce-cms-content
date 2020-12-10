@@ -43,12 +43,13 @@ app.use(function(err, req, res, next) {
   //res.locals.error = req.app.get('env') === 'development' ? err : {};
   res.locals.error = err;
   // render the error page
+  console.log(err.message);
+  res.render(err.message);
   res.status(err.status || 500);
   //res.status(err.message || 500);
   //const status = err.status || 500;
   //res.status(status);
-  res.render(err);
-  //res.render('error');
+   res.render('error');
 });
 
 
