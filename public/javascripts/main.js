@@ -113,13 +113,14 @@ function setImage() {
     link: link,
     width: width,
     height: height,
-    imageurl: imageurl,
+    imageurl: imageurl || 'https://media3.giphy.com/media/YJBNjrvG5Ctmo/giphy.gif',
     alignment: alignment,
     scale: scale
   });
 }
 
 sdk.getData(function(data) {
+  alert('inside getData')
   console.log('inside getData');
   link = data.link || '';
   width = data.width || '300';
