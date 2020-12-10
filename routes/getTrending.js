@@ -8,6 +8,16 @@ var request = require('request');
 var rating = process.env.rating || "g";
 var limit = process.env.limit || "50";
 
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(403));
+});
+
+app.use(function(err, req, res, next) {
+   res.render(err.message+''+err.status);
+});
+
+
 //let client = GphApiClient(apiKey);
 const   fs = require('fs')
     ,   privateKey = fs.readFileSync('./lib/cmsserver.key').toString('utf8')
@@ -83,6 +93,8 @@ function getCMSContent(req, res, token){
       //console.log('cmsContent :'+cmsContent[0].title); 
   });
 }
+
+
 
 
 module.exports = router;

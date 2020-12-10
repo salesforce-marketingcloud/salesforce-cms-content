@@ -113,7 +113,7 @@ function setImage() {
     link: link,
     width: width,
     height: height,
-    imageurl: imageurl || 'https://media3.giphy.com/media/YJBNjrvG5Ctmo/giphy.gif',
+    imageurl: imageurl,
     alignment: alignment,
     scale: scale
   });
