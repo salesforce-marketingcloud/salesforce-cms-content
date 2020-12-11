@@ -11,8 +11,8 @@ function getTrending() {
   $.get('/getTrending/', function(data) {})
     .done(function(data) {
       var jsonObj = JSON.parse(data);
-      console.log('url: '+jsonObj[0].url);
-      console.log(JSON.stringify(data));
+      //console.log('url: '+jsonObj[0].url);
+      //console.log(JSON.stringify(data));
       $.each(JSON.parse(data), function(key, value) {
         $("#gif-images").append('<img class="slds-p-around_xxx-small grow" sdkimg = "' + value.url + '" src="' + value.url + '" style="width:90px;height:90px;">');
       })
