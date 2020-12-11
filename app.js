@@ -28,7 +28,7 @@ app.use('/sfsdk', express.static(__dirname + '/node_modules/blocksdk/'));
 
 //app.use('/gjssdk', express.static(__dirname + '/node_modules/giphy-js-sdk-core/'));
 app.use('/', indexRouter);
-app.use('/getTrending', getTrendingRouter);
+//app.use('/getTrending', getTrendingRouter);
 app.use('/getSearch', getSearchRouter);
 
 /*
