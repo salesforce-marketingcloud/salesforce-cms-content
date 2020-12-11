@@ -9,10 +9,12 @@ var path = require('path');
 var rating = process.env.rating || "g";
 var limit = process.env.limit || "50";
 
+console.log('__dirname: '+__dirname);
+console.log("path.resolve() : ", path.resolve());
 //let client = GphApiClient(apiKey);
 const   fs = require('fs')
-    ,   privateKey = fs.readFileSync(path.join('./lib','/cmsserver.key')).toString('utf8')
-    , jwt = require(path.join('../','/node_modules/salesforce-jwt-bearer-token-flow/lib/index.js'))
+    ,   privateKey = fs.readFileSync('./lib/cmsserver.key').toString('utf8')
+    , jwt = require(path.join(path.resolve(),'node_modules/salesforce-jwt-bearer-token-flow/lib/index.js'))
   ;
 
 /*
