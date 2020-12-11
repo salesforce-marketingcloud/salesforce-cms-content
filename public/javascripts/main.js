@@ -25,7 +25,6 @@ function getTrending() {
     })
 }
 
-
 function getSearch() {
   searchTerm = document.getElementById('search-text').value;
   $("#gif-images").empty();
