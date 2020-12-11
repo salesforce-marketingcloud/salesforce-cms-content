@@ -7,7 +7,7 @@ $(function() {
 });
 
 function getTrending() {
-  console.log('inside getTrending:');
+  //console.log('inside getTrending:');
   $.get('/getTrending/', function(data) {})
     .done(function(data) {
       var jsonObj = JSON.parse(data);
