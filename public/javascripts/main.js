@@ -21,7 +21,7 @@ function getTrending() {
     .fail(function(data) {
       trendingErrorStatus = data.status;
       trendingErrorText = data.statusText;
-      $("#gif-images").append('<div class="slds-text-heading_medium slds-text-align_left slds-text-color_destructive">' + trendingErrorStatus + ': ' + trendingErrorText + '</div>');
+      $("#gif-images").append('<div class="slds-text-heading_medium slds-text-align_left slds-text-color_destructive">' + trendingErrorStatus + ': ' + trendingErrorText + 'TEST: '+JSON.stringify(data)+'</div>');
     })
 }
 
