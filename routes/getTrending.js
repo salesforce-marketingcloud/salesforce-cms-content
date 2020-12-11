@@ -26,7 +26,7 @@ const   fs = require('fs')
 */
 
 cmsContent = [];
-
+/*
 
 router.get('/', function(req, res) {
   console.log('inside getJWTToken');
@@ -52,7 +52,7 @@ router.get('/', function(req, res) {
     
   });
 });
-
+*/
 function getCMSContent(req, res, token){
   //console.log('token: '+token.access_token)
   var url = token.instance_url+'/services/data/v50.0/connect/cms/delivery/channels/0ap3h000000LlA6AAK/contents/query';
@@ -94,7 +94,6 @@ function getCMSContent(req, res, token){
       //console.log('cmsContent :'+cmsContent[0].title); 
   });
 }
-
 
 
 
