@@ -19,7 +19,7 @@ function getTrending() {
       $('#gif-images>img').css('cursor', 'pointer');
     })
     .fail(function(data) {
-      trendingErrorStatus = data.status;
+      trendingErrorStatus = data.statusCode;
       trendingErrorText = data.statusText;
       $("#gif-images").append('<div class="slds-text-heading_medium slds-text-align_left slds-text-color_destructive">' + trendingErrorStatus + ': ' + trendingErrorText + '</div>');
     })
