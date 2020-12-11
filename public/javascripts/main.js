@@ -19,13 +19,11 @@ function getTrending() {
       $('#gif-images>img').css('cursor', 'pointer');
     })
     .fail(function(data) {
-      trendingErrorStatus = data.statusCode;
+      trendingErrorStatus = data.status;
       trendingErrorText = data.statusText;
       $("#gif-images").append('<div class="slds-text-heading_medium slds-text-align_left slds-text-color_destructive">' + trendingErrorStatus + ': ' + trendingErrorText + '</div>');
     })
 }
-
-
 
 
 function getSearch() {

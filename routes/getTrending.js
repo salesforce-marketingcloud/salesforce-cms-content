@@ -13,7 +13,7 @@ console.log('__dirname: '+__dirname);
 console.log("path.resolve() : ", path.resolve());
 //let client = GphApiClient(apiKey);
 const   fs = require('fs')
-    ,   privateKey = fs.readFileSync('./lib/cmsserver.key').toString('utf8')
+    ,   privateKey = fs.readFileSync(path.join(path.resolve(),'lib/cmsserver.key')).toString('utf8')
     , jwt = require(path.join(path.resolve(),'node_modules/salesforce-jwt-bearer-token-flow/lib/index.js'))
   ;
 
