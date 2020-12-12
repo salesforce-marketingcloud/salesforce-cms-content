@@ -12,7 +12,7 @@ var getSearchRouter = require('./routes/getSearch');
 */
 
 var indexRouter = require(path.join(path.resolve(),'routes/index'));
-//var getTrendingRouter = require(path.join(path.resolve(),'routes/getTrending'));
+var getTrendingRouter = require(path.join(path.resolve(),'routes/getTrending'));
 var getSearchRouter = require(path.join(path.resolve(),'routes/getSearch'));
 
 var app = express();
@@ -33,7 +33,7 @@ app.use('/sfsdk', express.static(__dirname + '/node_modules/blocksdk/'));
 
 //app.use('/gjssdk', express.static(__dirname + '/node_modules/giphy-js-sdk-core/'));
 app.use('/', indexRouter);
-//app.use('/getTrending', getTrendingRouter);
+app.use('/getTrending', getTrendingRouter);
 app.use('/getSearch', getSearchRouter);
 
 
