@@ -12,7 +12,7 @@ var getSearchRouter = require('./routes/getSearch');
 */
 
 var indexRouter = require(path.join(path.resolve(),'routes/index'));
-var getTrendingRouter = require(path.join(path.resolve(),'routes/getTrending'));
+//var getTrendingRouter = require(path.join(path.resolve(),'routes/getTrending'));
 var getSearchRouter = require(path.join(path.resolve(),'routes/getSearch'));
 
 var app = express();
