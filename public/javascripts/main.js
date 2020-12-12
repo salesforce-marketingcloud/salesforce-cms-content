@@ -3,7 +3,7 @@ var trendingErrorStatus, trendingErrorText, imageurl, searchTerm;
 
 $(function() {
   // Handler for .ready() called.
-  //getTrending();
+  getTrending();
 });
 
 function getTrending() {
