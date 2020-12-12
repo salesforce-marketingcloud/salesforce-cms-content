@@ -114,14 +114,14 @@ function setImage() {
   });
 }
 
-sdk.getData(function(mydata) {
+sdk.getData(function(data) {
   //console.log('inside getData');
-  link = mydata.link || '';
-  width = mydata.width || '300';
-  height = mydata.height || '300';
-  imageurl = mydata.imageurl || 'https://media3.giphy.com/media/YJBNjrvG5Ctmo/giphy.gif';
-  alignment = mydata.alignment || 'center';
-  scale = mydata.scale || 'no';
+  link = data.link || '';
+  width = data.width || '300';
+  height = data.height || '300';
+  imageurl = data.imageurl || 'https://media3.giphy.com/media/YJBNjrvG5Ctmo/giphy.gif';
+  alignment = data.alignment || 'center';
+  scale = data.scale || 'no';
   blockSettings();
   setImage();
 });
