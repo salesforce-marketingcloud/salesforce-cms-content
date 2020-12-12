@@ -9,7 +9,7 @@ var path = require('path');
 var rating = process.env.rating || "g";
 var limit = process.env.limit || "50";
 
-/*
+
 console.log('__dirname: '+__dirname);
 console.log("path.resolve() : ", path.resolve());
 //let client = GphApiClient(apiKey);
@@ -17,7 +17,7 @@ const   fs = require('fs')
     ,   privateKey = fs.readFileSync(path.join(path.resolve(),'lib/cmsserver.key')).toString('utf8')
     , jwt = require(path.join(path.resolve(),'node_modules/salesforce-jwt-bearer-token-flow/lib/index.js'))
   ;
-*/
+
 /*
 const   fs = require('fs')
     ,   privateKey = fs.readFileSync('./lib/cmsserver.key').toString('utf8')
@@ -25,7 +25,7 @@ const   fs = require('fs')
   ;
 
 */
-/*
+
 cmsContent = [];
 
 
@@ -96,6 +96,6 @@ function getCMSContent(req, res, token){
   });
 }
 
-*/
+
 
 module.exports = router;
