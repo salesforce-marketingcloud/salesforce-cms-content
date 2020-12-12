@@ -1,6 +1,5 @@
 var trendingErrorStatus, trendingErrorText, imageurl, searchTerm;
 //$(document).ready(getTrending);
-
 $(function() {
   // Handler for .ready() called.
   getTrending();
@@ -10,7 +9,6 @@ function getTrending() {
   //console.log('inside getTrending:');
   $.get('/getTrending/', function(data) {})
     .done(function(data) {
-      var jsonObj = JSON.parse(data);
       //console.log('url: '+jsonObj[0].url);
       //console.log(JSON.stringify(data));
       $.each(JSON.parse(data), function(key, value) {
@@ -116,15 +114,14 @@ function setImage() {
   });
 }
 
-sdk.getData(function(data) {
-  alert('inside getData')
-  console.log('inside getData');
-  link = data.link || '';
-  width = data.width || '300';
-  height = data.height || '300';
-  imageurl = data.imageurl || 'https://media3.giphy.com/media/YJBNjrvG5Ctmo/giphy.gif';
-  alignment = data.alignment || 'center';
-  scale = data.scale || 'no';
+sdk.getData(function(mydata) {
+  //console.log('inside getData');
+  link = mydata.link || '';
+  width = mydata.width || '300';
+  height = mydata.height || '300';
+  imageurl = mydata.imageurl || 'https://media3.giphy.com/media/YJBNjrvG5Ctmo/giphy.gif';
+  alignment = mydata.alignment || 'center';
+  scale = mydata.scale || 'no';
   blockSettings();
   setImage();
 });
