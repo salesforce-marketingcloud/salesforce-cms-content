@@ -5,18 +5,25 @@ var path = require('path');
 //var GphApiClient = require('giphy-js-sdk-core');
 
 
-//var apiKey = process.env.apikey;
-var rating = process.env.rating || "g";
+var clientID = process.env.clientID;
 var limit = process.env.limit || "50";
-
+var SECURE_KEY = process.env.SECURE_KEY;
 
 console.log('__dirname: '+__dirname);
 console.log("path.resolve() : ", path.resolve());
-//let client = GphApiClient(apiKey);
+
+/*
+//use cmsserver.key for localhost
 const   fs = require('fs')
     ,   privateKey = fs.readFileSync(path.join(path.resolve(),'lib/cmsserver.key')).toString('utf8')
     , jwt = require(path.join(path.resolve(),'node_modules/salesforce-jwt-bearer-token-flow/lib/index.js'))
   ;
+*/
+const   fs = require('fs')
+  ,   privateKey = fs.readFileSync(SECURE_KEY).toString('utf8')
+  , jwt = require(path.join(path.resolve(),'node_modules/salesforce-jwt-bearer-token-flow/lib/index.js'))
+;
+
 
 /*
 const   fs = require('fs')
@@ -32,8 +39,10 @@ cmsContent = [];
 router.get('/', function(req, res) {
   console.log('inside getJWTToken');
   var token = jwt.getToken({  
+    //YOUR_CONNECTED_APP_CLIENT_ID - hardcoded for localhost
+    //iss: "3MVG9Kip4IKAZQEURQLxNTxad_Di6MhEhmmrr.wADSgoWUs7g4GMDBB_eUKA54y5vEc_0BVdZgyKqBGl_FaF4",
     //YOUR_CONNECTED_APP_CLIENT_ID
-    iss: "3MVG9Kip4IKAZQEURQLxNTxad_Di6MhEhmmrr.wADSgoWUs7g4GMDBB_eUKA54y5vEc_0BVdZgyKqBGl_FaF4",
+    iss: clientID,
     //YOUR_SALESFORCE_USERNAME
     sub: "raj@cmsworkshopmasterorg.demo",
     //YOUR_AUDIENCE

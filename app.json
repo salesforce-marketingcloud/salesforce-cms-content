@@ -5,24 +5,12 @@
   "logo": "https://experts-cb-sdk-giphy.herokuapp.com/images/giphy-selector.png",
   "keywords": ["content builder", "sdk", "giphy", "marketing cloud"],
   "env": {
-    "apikey": {
-      "description": "Create a new Giphy app - https://developers.giphy.com/dashboard/?create=true"
+    "clientID": {
+      "description": "Client ID from Salesforce connected app"
     },
     "limit": {
       "description": "Number of results to return, maximum 100.",
       "value": "25"
-    },
-    "rating": {
-      "description": "Limit results to those rated (g, pg, pg-13 or r)",
-      "value": "g"
-    },
-    "language": {
-      "description": "Default country for regional content; format is 2-letter ISO 639-1 country code.",
-      "value": "en"
-    },
-    "sort": {
-      "description": "Sort order of the results returned (recent | relevant)",
-      "value": "relevant"
     }
   }
 }
