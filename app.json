@@ -1,7 +1,7 @@
 {
   "name": "Giphy Selector 9000",
   "description": "Example Marketing Cloud Content Builder SDK block for Giphy",
-  "repository": "https://github.com/acates1982/cbSdkGiphy",
+  "repository": "https://github.com/raj-rao/cmscontentblocksdk.git",
   "logo": "https://experts-cb-sdk-giphy.herokuapp.com/images/giphy-selector.png",
   "keywords": ["content builder", "sdk", "giphy", "marketing cloud"],
   "env": {
