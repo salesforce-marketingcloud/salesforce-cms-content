@@ -8,6 +8,10 @@
     "clientID": {
       "description": "Client ID from Salesforce connected app"
     },
+    "privateKey": {
+      "description": "Servey key"
+    }
+    },
     "limit": {
       "description": "Number of results to return, maximum 100.",
       "value": "50"
