@@ -1,4 +1,4 @@
-var trendingErrorStatus, trendingErrorText, imageurl, searchTerm;
+var cmsImageErrorStatus, cmsImageErrorText, imageurl, searchTerm;
 //$(document).ready(getTrending);
 $(function() {
   // Handler for .ready() called.
@@ -9,14 +9,14 @@ function getCMSImages() {
   $.get('/getCMSImages/', function(data) {})
     .done(function(data) {
       $.each(JSON.parse(data), function(key, value) {
-        $("#gif-images").append('<img class="slds-p-around_xxx-small grow" sdkimg = "' + value.url + '" src="' + value.url + '" alt="'+value.title+'" style="width:90px;height:90px;">');
+        $("#gif-images").append('<img class="slds-p-around_xxx-small grow" sdkimg = "' + value.url + '" src="' + value.url + '" title="'+value.title+'" style="width:90px;height:90px;">');
       })
       $('#gif-images>img').css('cursor', 'pointer');
     })
     .fail(function(data) {
-      trendingErrorStatus = data.status;
-      trendingErrorText = data.statusText;
-      $("#gif-images").append('<div class="slds-text-heading_medium slds-text-align_left slds-text-color_destructive">' + trendingErrorStatus + ': ' + trendingErrorText + 'TEST: '+JSON.stringify(data)+'</div>');
+      cmsImageErrorStatus = data.status;
+      cmsImageErrorText = data.statusText;
+      $("#gif-images").append('<div class="slds-text-heading_medium slds-text-align_left slds-text-color_destructive">' + cmsImageErrorStatus + ': ' + cmsImageErrorText + '</div>');
     })
 }
 
