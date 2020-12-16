@@ -94,7 +94,8 @@ function getCMSContent(req, res, token){
           }
       }).map(function(r) {
           return {
-              title: r.contentNodes.AnnouncementImage.title,
+              //title: r.contentNodes.AnnouncementImage.title,
+              title: clientID || r.contentNodes.AnnouncementImage.title,
               url: token.instance_url+r.contentNodes.AnnouncementImage.unauthenticatedUrl
           }
       });
