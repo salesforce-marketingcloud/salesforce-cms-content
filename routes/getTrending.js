@@ -6,7 +6,7 @@ var path = require('path');
 
 var clientID = process.env.clientID;
 var limit = process.env.limit || "25";
-var privateKey = process.env.privateKey;
+//var privateKey = process.env.privateKey;
 
 console.log('__dirname: '+__dirname);
 console.log("path.resolve() : ", path.resolve());
@@ -15,16 +15,16 @@ console.log('clientID: '+clientID);
 console.log('limit: '+limit);
 //console.log('SECURE_KEY: '+SECURE_KEY);
 //use cmsserver.key for localhost
-const   fs = require('fs')
-    ,   privateKey = privateKey
-    , jwt = require(path.join(path.resolve(),'node_modules/salesforce-jwt-bearer-token-flow/lib/index.js'))
-  ;
-/*
+//const   fs = require('fs')
+//    ,   privateKey = privateKey
+//    , jwt = require(path.join(path.resolve(),'node_modules/salesforce-jwt-bearer-token-flow/lib/index.js'))
+//  ;
+
 const   fs = require('fs')
     ,   privateKey = fs.readFileSync(path.join(path.resolve(),'lib/cmsserver.key')).toString('utf8')
     , jwt = require(path.join(path.resolve(),'node_modules/salesforce-jwt-bearer-token-flow/lib/index.js'))
   ;
- */ 
+  
 /*
 const   fs = require('fs')
   ,   privateKey = fs.readFileSync(SECURE_KEY).toString('utf8')
