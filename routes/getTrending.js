@@ -8,12 +8,8 @@ var clientID = process.env.clientID;
 var limit = process.env.limit || "25";
 var envprivateKey = process.env.privateKey;
 
-console.log('__dirname: '+__dirname);
-console.log("path.resolve() : ", path.resolve());
 
-console.log('clientID: '+clientID);
-console.log('limit: '+limit);
-//console.log('SECURE_KEY: '+SECURE_KEY);
+
 const   fs = require('fs')
     ,   privateKey = envprivateKey.toString('utf8')
     , jwt = require(path.join(path.resolve(),'node_modules/salesforce-jwt-bearer-token-flow/lib/index.js'))
@@ -43,7 +39,6 @@ cmsContent = [];
 
 
 router.get('/', function(req, res) {
-  console.log('inside getJWTToken');
   var token = jwt.getToken({  
     //YOUR_CONNECTED_APP_CLIENT_ID - hardcoded for localhost
     //iss: "3MVG9Kip4IKAZQEURQLxNTxad_Di6MhEhmmrr.wADSgoWUs7g4GMDBB_eUKA54y5vEc_0BVdZgyKqBGl_FaF4",
@@ -58,8 +53,6 @@ router.get('/', function(req, res) {
   function(err, token){
     try {
         if(token != null){
-            console.log(token);
-          
             getCMSContent(req, res, token);
         }
     } catch (error) {
@@ -72,8 +65,6 @@ router.get('/', function(req, res) {
 function getCMSContent(req, res, token){
   //console.log('token: '+token.access_token)
   var url = token.instance_url+'/services/data/v50.0/connect/cms/delivery/channels/0ap3h000000LlA6AAK/contents/query';
-  //console.log('url :'+url);
-
   request({
       url: url,
       method: "GET",
@@ -81,7 +72,6 @@ function getCMSContent(req, res, token){
           'Authorization': 'Bearer '+token.access_token
       },
   }, function (error, response, body){
-      //console.log(response);
       results = JSON.parse(body);
       var cmsContent = results.items.filter(function(d) {
           try {
@@ -91,27 +81,18 @@ function getCMSContent(req, res, token){
               return false; // skip if no preview url
           }catch(error){
             return false;
-            //console.log(error);
-            //res.statusCode = error.status;
-            //res.send(
-            //  JSON.stringify(error)
-            //);
           }
       }).map(function(r) {
           return {
               title: r.contentNodes.AnnouncementImage.title,
-              //title: clientID,
               url: token.instance_url+r.contentNodes.AnnouncementImage.unauthenticatedUrl
           }
       });
-      //res.statusCode = err.status;
       res.send(
         JSON.stringify(cmsContent)
       );
       //console.log('cmsContent :'+cmsContent[0].title); 
   });
 }
-
-
 
 module.exports = router;
