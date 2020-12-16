@@ -1,3 +1,3 @@
 node_modules/
 .DS_Store
-/cmsserver.key
+lib/cmsserver.key
