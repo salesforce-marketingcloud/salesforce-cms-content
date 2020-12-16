@@ -6,7 +6,7 @@ var path = require('path');
 
 var clientID = process.env.clientID;
 var limit = process.env.limit || "25";
-//var SECURE_KEY = process.env.SECURE_KEY;
+var privateKey = process.env.SECURE_KEY;
 
 console.log('__dirname: '+__dirname);
 console.log("path.resolve() : ", path.resolve());
@@ -15,10 +15,12 @@ console.log('clientID: '+clientID);
 console.log('limit: '+limit);
 //console.log('SECURE_KEY: '+SECURE_KEY);
 //use cmsserver.key for localhost
+/*
 const   fs = require('fs')
     ,   privateKey = fs.readFileSync(path.join(path.resolve(),'lib/cmsserver.key')).toString('utf8')
     , jwt = require(path.join(path.resolve(),'node_modules/salesforce-jwt-bearer-token-flow/lib/index.js'))
   ;
+ */ 
 /*
 const   fs = require('fs')
   ,   privateKey = fs.readFileSync(SECURE_KEY).toString('utf8')
@@ -41,9 +43,9 @@ router.get('/', function(req, res) {
   console.log('inside getJWTToken');
   var token = jwt.getToken({  
     //YOUR_CONNECTED_APP_CLIENT_ID - hardcoded for localhost
-    iss: "3MVG9Kip4IKAZQEURQLxNTxad_Di6MhEhmmrr.wADSgoWUs7g4GMDBB_eUKA54y5vEc_0BVdZgyKqBGl_FaF4",
+    //iss: "3MVG9Kip4IKAZQEURQLxNTxad_Di6MhEhmmrr.wADSgoWUs7g4GMDBB_eUKA54y5vEc_0BVdZgyKqBGl_FaF4",
     //YOUR_CONNECTED_APP_CLIENT_ID
-    //iss: clientID,
+    iss: clientID,
     //YOUR_SALESFORCE_USERNAME
     sub: "raj@cmsworkshopmasterorg.demo",
     //YOUR_AUDIENCE
@@ -94,8 +96,8 @@ function getCMSContent(req, res, token){
           }
       }).map(function(r) {
           return {
-              //title: r.contentNodes.AnnouncementImage.title,
-              title: clientID || clientID,
+              title: r.contentNodes.AnnouncementImage.title,
+              //title: clientID,
               url: token.instance_url+r.contentNodes.AnnouncementImage.unauthenticatedUrl
           }
       });
