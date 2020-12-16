@@ -12,7 +12,7 @@ function getTrending() {
       //console.log('url: '+jsonObj[0].url);
       //console.log(JSON.stringify(data));
       $.each(JSON.parse(data), function(key, value) {
-        $("#gif-images").append('<img class="slds-p-around_xxx-small grow" sdkimg = "' + value.url + '" src="' + value.url + '" style="width:90px;height:90px;">');
+        $("#gif-images").append('Title: '+value.title+'<img class="slds-p-around_xxx-small grow" sdkimg = "' + value.url + '" src="' + value.url + '" style="width:90px;height:90px;">');
       })
       $('#gif-images>img').css('cursor', 'pointer');
     })
