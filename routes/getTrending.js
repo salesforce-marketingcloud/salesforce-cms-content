@@ -2,20 +2,18 @@ var express = require('express');
 var router = express.Router();
 var request = require('request');
 var path = require('path');
-require('dotenv').config();
-//var GphApiClient = require('giphy-js-sdk-core');
 
 
 var clientID = process.env.clientID;
 var limit = process.env.limit || "25";
-var SECURE_KEY = process.env.SECURE_KEY;
+//var SECURE_KEY = process.env.SECURE_KEY;
 
 console.log('__dirname: '+__dirname);
 console.log("path.resolve() : ", path.resolve());
-alert('clientID: '+clientID);
+
 console.log('clientID: '+clientID);
 console.log('limit: '+limit);
-console.log('SECURE_KEY: '+SECURE_KEY);
+//console.log('SECURE_KEY: '+SECURE_KEY);
 //use cmsserver.key for localhost
 const   fs = require('fs')
     ,   privateKey = fs.readFileSync(path.join(path.resolve(),'lib/cmsserver.key')).toString('utf8')
