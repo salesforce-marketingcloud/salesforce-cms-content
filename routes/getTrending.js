@@ -8,7 +8,6 @@ var limit = process.env.limit || "25";
 var environment = process.env.NODE_ENV || 'development'; 
 var envprivateKey;
 
-console.log('process.env.NODE_ENV: '+environment)
 
 //Environment and process.env values
 if(environment === 'development'){

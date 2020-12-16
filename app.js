@@ -7,7 +7,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require(path.join(path.resolve(),'routes/index'));
-var getTrendingRouter = require(path.join(path.resolve(),'routes/getTrending'));
+var getCMSImagesRouter = require(path.join(path.resolve(),'routes/getCMSImages'));
 var getSearchRouter = require(path.join(path.resolve(),'routes/getSearch'));
 
 var app = express();
@@ -29,7 +29,7 @@ app.use('/sfsdk', express.static(__dirname + '/node_modules/blocksdk/'));
 
 //app.use('/gjssdk', express.static(__dirname + '/node_modules/giphy-js-sdk-core/'));
 app.use('/', indexRouter);
-app.use('/getTrending', getTrendingRouter);
+app.use('/getCMSImages', getCMSImagesRouter);
 app.use('/getSearch', getSearchRouter);
 
 
