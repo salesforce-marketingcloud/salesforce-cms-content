@@ -9,7 +9,7 @@ function getCMSImages() {
   $.get('/getCMSImages/', function(data) {})
     .done(function(data) {
       $.each(JSON.parse(data), function(key, value) {
-        $("#gif-images").append('<img class="slds-p-around_xxx-small grow" sdkimg = "' + value.url + '" src="' + value.url + ' alt="'+value.title+' style="width:90px;height:90px;">');
+        $("#gif-images").append('<img class="slds-p-around_xxx-small grow" sdkimg = "' + value.url + '" src="' + value.url + '" alt="'+value.title+'" style="width:90px;height:90px;">');
       })
       $('#gif-images>img').css('cursor', 'pointer');
     })
