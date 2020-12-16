@@ -3,51 +3,39 @@ var router = express.Router();
 var request = require('request');
 var path = require('path');
 
-
-var clientID = process.env.clientID;
+var clientID = process.env.clientID || '3MVG9Kip4IKAZQEURQLxNTxad_Di6MhEhmmrr.wADSgoWUs7g4GMDBB_eUKA54y5vEc_0BVdZgyKqBGl_FaF4';
 var limit = process.env.limit || "25";
-var envprivateKey = process.env.privateKey;
+var environment = process.env.NODE_ENV || 'development'; 
+var envprivateKey;
 
+console.log('process.env.NODE_ENV: '+environment)
 
-
-const   fs = require('fs')
-    ,   privateKey = envprivateKey.toString('utf8')
-    , jwt = require(path.join(path.resolve(),'node_modules/salesforce-jwt-bearer-token-flow/lib/index.js'))
-  ;
-/*
-const   fs = require('fs')
-    ,   privateKey = fs.readFileSync(path.join(path.resolve(),'lib/cmsserver.key')).toString('utf8')
-    , jwt = require(path.join(path.resolve(),'node_modules/salesforce-jwt-bearer-token-flow/lib/index.js'))
-  ;
-*/  
-/*
-const   fs = require('fs')
-  ,   privateKey = fs.readFileSync(SECURE_KEY).toString('utf8')
+//Environment and process.env values
+if(environment === 'development'){
+  const   fs = require('fs')
+  privateKey = fs.readFileSync(path.join(path.resolve(),'lib/cmsserver.key')).toString('utf8')
   , jwt = require(path.join(path.resolve(),'node_modules/salesforce-jwt-bearer-token-flow/lib/index.js'))
 ;
-*/
-
-/*
-const   fs = require('fs')
-    ,   privateKey = fs.readFileSync('./lib/cmsserver.key').toString('utf8')
-    , jwt = require('../node_modules/salesforce-jwt-bearer-token-flow/lib/index')
+}else{
+  envprivateKey = process.env.privateKey;
+  const   fs = require('fs')
+    privateKey = envprivateKey.toString('utf8')
+    , jwt = require(path.join(path.resolve(),'node_modules/salesforce-jwt-bearer-token-flow/lib/index.js'))
   ;
-
-*/
+}
 
 cmsContent = [];
 
 
 router.get('/', function(req, res) {
   var token = jwt.getToken({  
-    //YOUR_CONNECTED_APP_CLIENT_ID - hardcoded for localhost
-    //iss: "3MVG9Kip4IKAZQEURQLxNTxad_Di6MhEhmmrr.wADSgoWUs7g4GMDBB_eUKA54y5vEc_0BVdZgyKqBGl_FaF4",
     //YOUR_CONNECTED_APP_CLIENT_ID
     iss: clientID,
     //YOUR_SALESFORCE_USERNAME
     sub: "raj@cmsworkshopmasterorg.demo",
     //YOUR_AUDIENCE
     aud: "https://login.salesforce.com",
+    //PrivateKey from lib/cmsserver.key if environment = development or 
     privateKey: privateKey
   },
   function(err, token){
