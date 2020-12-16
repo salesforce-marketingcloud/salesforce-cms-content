@@ -6,7 +6,7 @@ var path = require('path');
 
 var clientID = process.env.clientID;
 var limit = process.env.limit || "25";
-var privateKey = process.env.SECURE_KEY;
+var privateKey = process.env.privateKey;
 
 console.log('__dirname: '+__dirname);
 console.log("path.resolve() : ", path.resolve());
