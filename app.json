@@ -10,7 +10,7 @@
     },
     "limit": {
       "description": "Number of results to return, maximum 100.",
-      "value": "25"
+      "value": "50"
     }
   }
 }
