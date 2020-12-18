@@ -1,15 +1,18 @@
 {
-  "name": "Giphy Selector 9000",
-  "description": "Example Marketing Cloud Content Builder SDK block for Giphy",
+  "name": "Salesforce CMS Selector",
+  "description": "Example Marketing Cloud Content Builder SDK block for Salesforce CMS",
   "repository": "https://github.com/raj-rao/cmscontentdemo.git",
-  "logo": "https://experts-cb-sdk-giphy.herokuapp.com/images/giphy-selector.png",
-  "keywords": ["content builder", "sdk", "giphy", "marketing cloud"],
+  "logo": "https://c1.sfdcstatic.com/content/dam/sfdc-docs/www/logos/logo-salesforce.svg",
+  "keywords": ["content builder", "sdk", "cms", "marketing cloud"],
   "env": {
     "clientID": {
       "description": "Client ID from Salesforce connected app"
     },
     "privateKey": {
       "description": "Servey key"
+    },
+    "channelID": {
+      "description": "Enter Salesforce CMS Channel Id"
     },
     "limit": {
       "description": "Number of results to return, maximum 100.",

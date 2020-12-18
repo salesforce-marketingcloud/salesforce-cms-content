@@ -24,7 +24,9 @@
 * Must have a working Heroku Account to host app
 * Select the Deploy to Heroku button below
 * Fill out the environment variables
-	* clientID - Client ID from Salesforce connected app.
+	* clientID - Client ID from Salesforce connected app
+  * privateKey - Servey key
+  * channelID - Salesforce CMS Channel Id
   * limit - Number of results to return, maximum 100
 * Create an Installed Package and add a component type of Custom Content Block. Use the Heroku app URL as the Endpoint URL when configuring this component.
 

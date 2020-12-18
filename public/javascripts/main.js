@@ -1,5 +1,5 @@
 var cmsImageErrorStatus, cmsImageErrorText, imageurl, searchTerm;
-//$(document).ready(getTrending);
+//$(document).ready(getTrending); //.ready deprecated
 $(function() {
   // Handler for .ready() called.
   getCMSImages();
@@ -8,10 +8,14 @@ $(function() {
 function getCMSImages() {
   $.get('/getCMSImages/', function(data) {})
     .done(function(data) {
-      $.each(JSON.parse(data), function(key, value) {
-        $("#gif-images").append('<img class="slds-p-around_xxx-small grow" sdkimg = "' + value.url + '" src="' + value.url + '" title="'+value.title+'" style="width:90px;height:90px;">');
-      })
-      $('#gif-images>img').css('cursor', 'pointer');
+      if(JSON.parse(data)[0].message === 'The requested resource does not exist'){
+        $("#gif-images").append('<div class="slds-box slds-theme--error"><strong>Error : </strong>CMS Channel does not exist</div>');
+      }else{
+        $.each(JSON.parse(data), function(key, value) {
+          $("#gif-images").append('<img class="slds-p-around_xxx-small grow" sdkimg = "' + value.url + '" src="' + value.url + '" title="'+value.title+'" style="width:90px;height:90px;">');
+        })
+        $('#gif-images>img').css('cursor', 'pointer');
+      }
     })
     .fail(function(data) {
       cmsImageErrorStatus = data.status;
@@ -41,7 +45,6 @@ function getSearch() {
 }
 
 // SDK logic to set and retrieve attributes of block
-
 var sdk = new window.sfdc.BlockSDK({
   tabs: ['stylingblock', 'htmlblock']
 });
@@ -92,10 +95,10 @@ function setImage() {
 
   if (scale === "yes") {
       //sdk.setSuperContent('<div style="text-align: ' + alignment + ';"> <a href="' + link + '"><img style="width: 100%" src="' + imageurl + '" /></a></div><div style="text-align: center"><img src="https://experts-cb-sdk-giphy.herokuapp.com/images/Poweredby_100px-White_VertLogo.png"></div>'); 
-    sdk.setContent('<div style="text-align: ' + alignment + ';"> <a href="' + link + '"><img style="width: 100%" src="' + imageurl + '" /></a></div><div style="text-align: center"><img src="https://experts-cb-sdk-giphy.herokuapp.com/images/Poweredby_100px-White_VertLogo.png"></div>');
+    sdk.setContent('<div style="text-align: ' + alignment + ';"> <a href="' + link + '"><img style="width: 100%" src="' + imageurl + '" /></a></div>');
   } else {
     //sdk.setSuperContent('<div style="text-align: ' + alignment + ';"> <a href="' + link + '"><img style="width: 100%" src="' + imageurl + '" /></a></div><div style="text-align: center"><img src="https://experts-cb-sdk-giphy.herokuapp.com/images/Poweredby_100px-White_VertLogo.png"></div>')
-    sdk.setContent('<div style="text-align: ' + alignment + ';"> <a href="' + link + '"><img height="' + height + '" width="' + width + '" src="' + imageurl + '" /></a></div><div style="text-align: center"><img src="https://experts-cb-sdk-giphy.herokuapp.com/images/Poweredby_100px-White_VertLogo.png"></div>');
+    sdk.setContent('<div style="text-align: ' + alignment + ';"> <a href="' + link + '"><img height="' + height + '" width="' + width + '" src="' + imageurl + '" /></a></div>');
   }
 
   sdk.setData({
@@ -112,7 +115,8 @@ sdk.getData(function(data) {
   link = data.link || '';
   width = data.width || '300';
   height = data.height || '300';
-  imageurl = data.imageurl || 'https://media3.giphy.com/media/YJBNjrvG5Ctmo/giphy.gif';
+  //replace fallback url with Salesforce Logo
+  imageurl = data.imageurl || 'https://c1.sfdcstatic.com/content/dam/sfdc-docs/www/logos/logo-salesforce.svg';
   alignment = data.alignment || 'center';
   scale = data.scale || 'no';
   blockSettings();
@@ -145,17 +149,25 @@ document.getElementById("image-link").addEventListener("change", setImage);
 document.getElementById("image-alignment").addEventListener("change", setImage);
 document.getElementById("image-scale").addEventListener("change", setImage);
 
-$('#search')
-  .click(getSearch)
+$('#search').on('click',function(){
+  getSearch();
+});
+//.click(getSearch)  
 
 $('body').on('click', 'img', function() {
   imageurl = $(this).attr('sdkimg');
   setImage();
 })
-
-$('#search-text').keypress(function(event) {
-  var keycode = (event.keyCode ? event.keyCode : event.which);
-  if (keycode == '13') {
-    getSearch();
-  }
-});
+//TO DO Figure out how to invoke getSearch() on hitting the ENTER key / Return Key 
+//$('#search-text').on('keydown', function(event){
+//  if (event.w.which == 13 ) {
+//    getSearch();
+//  }
+//});
+//$('#search-text').keypress(function(event) {
+  //var keycode = (event.keyCode ? event.keyCode : event.which);
+  //if (keycode == '13') {
+    //if ( event.which == 13 ) {
+    //getSearch();
+  //}
+//});
