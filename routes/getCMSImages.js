@@ -5,11 +5,13 @@ var path = require('path');
 
 //Environment and process.env values
 var clientID = process.env.clientID || '3MVG9Kip4IKAZQEURQLxNTxad_Di6MhEhmmrr.wADSgoWUs7g4GMDBB_eUKA54y5vEc_0BVdZgyKqBGl_FaF4';
-var limit = process.env.limit || "25";
+var limit = process.env.limit || "25"; //page size 25
 var environment = process.env.NODE_ENV || 'development';
 var channelID = process.env.channelID || '0ap3h000000LlA6AAK';
 //'0ap3h000000LlA6AAK';
 var envprivateKey;
+var queryType = 'query';
+
 
 if(environment === 'development'){
   const   fs = require('fs')
@@ -25,10 +27,53 @@ if(environment === 'development'){
 }
 
 cmsContent = [];
+var token;
+
+
+
+//TO DO - Set token outside of router.get('/', function(req, res) { 
+/*
+router.get('/', function(req, res) {
+  var sfToken = jwt.getToken({  
+    //YOUR_CONNECTED_APP_CLIENT_ID
+    iss: clientID,
+    //YOUR_SALESFORCE_USERNAME
+    sub: "raj@cmsworkshopmasterorg.demo",
+    //YOUR_AUDIENCE
+    aud: "https://login.salesforce.com",
+    //PrivateKey from lib/cmsserver.key if environment = development or 
+    privateKey: privateKey
+  },
+  function(err, token){
+    try {
+        if(sfToken != null){
+            token = sfToken;
+        }
+    } catch (error) {
+      console.log('Token error: '+error);
+    }
+    
+  });
+});
+*/
+/*
+router.get('/', function(req, res) {
+  try {
+    if(token != null){
+      console.log('token.instance_url: '+token.instance_url);
+      getCMSContent(req, res, token);
+      return;
+    }
+  } catch (error) {
+    console.log('Token error: '+error);
+    return;
+  }
+});
+*/
 
 
 router.get('/', function(req, res) {
-  var token = jwt.getToken({  
+  token = jwt.getToken({  
     //YOUR_CONNECTED_APP_CLIENT_ID
     iss: clientID,
     //YOUR_SALESFORCE_USERNAME
@@ -42,18 +87,60 @@ router.get('/', function(req, res) {
     try {
         if(token != null){
             getCMSContent(req, res, token);
+            return;
         }
     } catch (error) {
       console.log('Token error: '+error);
+      return;
+    }
+  });
+});
+
+/*
+router.post('/', function(req, res) {
+  searchTerm = req.body.searchTerm;
+  queryType = req.body.queryType+'?queryTerm='+searchTerm;
+  console.log('token.instance_url: '+token.instance_url);
+  
+  token = jwt.getToken({  
+    //YOUR_CONNECTED_APP_CLIENT_ID
+    iss: clientID,
+    //YOUR_SALESFORCE_USERNAME
+    sub: "raj@cmsworkshopmasterorg.demo",
+    //YOUR_AUDIENCE
+    aud: "https://login.salesforce.com",
+    //PrivateKey from lib/cmsserver.key if environment = development or 
+    privateKey: privateKey
+    
+  },
+  function(err, token){
+    try {
+        if(token != null){
+            getCMSContent(req, res, token);
+            return;
+        }
+    } catch (error) {
+      console.log('Token error: '+error);
+      return;
     }
     
   });
 });
+*/
 
 function getCMSContent(req, res, token){
   //console.log('token: '+token.access_token)
+  //var searchTerm = document.getElementById('search-text').value;
+  //try {
+  //  if(req.body.searchTerm.length>1){
+//      console.log('searchTerm: '+searchTerm);
+//    }
+//  } catch (error) {
+    
+//  }
   var channelResource = true;
-  var url = token.instance_url+'/services/data/v50.0/connect/cms/delivery/channels/'+channelID+'/contents/query';
+  var url = token.instance_url+'/services/data/v50.0/connect/cms/delivery/channels/'+channelID+'/contents/' + queryType+'?pageSize='+limit;
+  console.log('url: '+url);
   request({
       url: url,
       method: "GET",
@@ -73,26 +160,61 @@ function getCMSContent(req, res, token){
     //console.log('Error: '+ JSON.parse(body)[0].message);  
     if(channelResource){
       results = JSON.parse(body);
-      var cmsContent = results.items.filter(function(d) {
-          try {
-              if (d.contentNodes.AnnouncementImage.unauthenticatedUrl != null && d.contentNodes.AnnouncementImage.title != null) {
-                  return true; // only return if preview url exists
+      //var result = "";
+      var cmsContentObj = [];
+      for(var x=0; x<results.items.length; x++){
+        var obj = results.items[x].contentNodes;
+        var contentType = results.items[x].type;
+        
+        for (var p in obj) {
+          switch(contentType) {
+            case 'cms_image':
+            {    
+              // code block
+              if( obj.hasOwnProperty(p) && obj[p].mediaType === 'Image') {
+                if(obj[p].fileName != null && obj[p].unauthenticatedUrl != null){
+    //              result += p + " , " + obj[p].title + "\n";
+    //              result += p + " , " + token.instance_url+obj[p].unauthenticatedUrl + "\n";
+                  cmsContentObj.push({title: obj.title.value,//obj[p].title,
+                  url: token.instance_url+obj[p].unauthenticatedUrl
+                  });
+                } 
               }
-              return false; // skip if no preview url
-          }catch(error){
-            return false;
-          }
-      }).map(function(r) {
-          return {
-              title: r.contentNodes.AnnouncementImage.title,
-              url: token.instance_url+r.contentNodes.AnnouncementImage.unauthenticatedUrl
-          }
+              break;
+            }  
+            case 'place_holder':
+            {
+            // code block
+              break;
+            }  
+            default:
+            {
+            // code block
+              if( obj.hasOwnProperty(p) && obj[p].mediaType === 'Image') {
+                if(obj[p].title != null && obj[p].unauthenticatedUrl != null){
+    //              result += p + " , " + obj[p].title + "\n";
+    //              result += p + " , " + token.instance_url+obj[p].unauthenticatedUrl + "\n";
+                  cmsContentObj.push({title: obj[p].title,
+                  url: token.instance_url+obj[p].unauthenticatedUrl
+                  });
+                } 
+              }
+            }  
+          }              
+        }
+      }
+      //convert cmsContentObj data to a map to remove duplicates
+      var cmsDataArr = cmsContentObj.map(item=>{
+        return [item.title,item]
       });
+      var cmsMapArr = new Map(cmsDataArr); // create key value pair from array of array
+      var cmsContent = [...cmsMapArr.values()];//converting back to array from map
+
       res.send(
         JSON.stringify(cmsContent)
       );
     }
-      //console.log('cmsContent :'+cmsContent[0].title); 
+      //console.log('cmsContent :'+cmsContent[0].title);
   });
 }
 

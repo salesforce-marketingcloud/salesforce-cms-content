@@ -6,20 +6,29 @@ input[type="text"]
 {
   color: #3e3e3c !important;
   font-weight: 400 !important;
-  font-size: 0.8125rem !important;
+  font-size: 0.75rem !important;
 }
 
 textarea {
 color: #3e3e3c !important;
 font-weight: 400 !important;
-font-size: 0.8125rem !important;
+font-size: 0.75rem !important;
 }
 
 ::placeholder {
 color: #3e3e3c !important;
 font-weight: 400 !important;
-font-size: 0.8125rem!important;
+font-size: 0.75rem!important;
+}
+
+.slds-form-element__label, .slds-slider-label__label{
+color: #6e6e6e !important;
+font-weight: 600 !important;
 }
 
 .grow { transition: all .2s ease-in-out; }
 .grow:hover { transform: scale(2); }
+
+.slds-text-heading_small, .slds-text-heading_medium, .slds-text-heading_large{
+  font-weight: 500 !important;
+}

@@ -9,21 +9,48 @@ function getCMSImages() {
   $.get('/getCMSImages/', function(data) {})
     .done(function(data) {
       if(JSON.parse(data)[0].message === 'The requested resource does not exist'){
-        $("#gif-images").append('<div class="slds-box slds-theme--error"><strong>Error : </strong>CMS Channel does not exist</div>');
+        $("#cms-images").append('<div class="slds-box slds-theme--error"><strong>Error : </strong>CMS Channel does not exist</div>');
       }else{
         $.each(JSON.parse(data), function(key, value) {
-          $("#gif-images").append('<img class="slds-p-around_xxx-small grow" sdkimg = "' + value.url + '" src="' + value.url + '" title="'+value.title+'" style="width:90px;height:90px;">');
+          $("#cms-images").append('<img class="slds-p-around_xxx-small grow" sdkimg = "' + value.url + '" src="' + value.url + '" title="'+value.title+'" style="width:120px;height:80px;">');
         })
-        $('#gif-images>img').css('cursor', 'pointer');
+        $('#cms-images>img').css('cursor', 'pointer');
       }
     })
     .fail(function(data) {
       cmsImageErrorStatus = data.status;
       cmsImageErrorText = data.statusText;
-      $("#gif-images").append('<div class="slds-text-heading_medium slds-text-align_left slds-text-color_destructive">' + cmsImageErrorStatus + ': ' + cmsImageErrorText + '</div>');
+      $("#cms-images").append('<div class="slds-text-heading_medium slds-text-align_left slds-text-color_destructive">' + cmsImageErrorStatus + ': ' + cmsImageErrorText + '</div>');
     })
 }
 
+function getSearch() {
+  searchTerm = document.getElementById('search-text').value;
+  console.log('searchTerm: '+searchTerm);
+  $("#cms-images").empty();
+  var postData = {
+    'searchTerm': searchTerm,
+    'queryType' : 'search'
+  };
+  //$.post('/getCMSImages/', postData, function(data) {})
+  $.post('/getSearch/', postData, function(data) {})
+    .done(function(data) {
+      if(JSON.parse(data)[0].message === 'The requested resource does not exist'){
+        $("#cms-images").append('<div class="slds-box slds-theme--error"><strong>Error : </strong>CMS Channel does not exist</div>');
+      }else{
+        $.each(JSON.parse(data), function(key, value) {
+          $("#cms-images").append('<img class="slds-p-around_xxx-small grow" sdkimg = "' + value.url + '" src="' + value.url + '" title="'+value.title+'" style="width:90px;height:90px;">');
+        })
+        $('#cms-images>img').css('cursor', 'pointer');
+      }
+    })
+    .fail(function(data) {
+      cmsImageErrorStatus = data.status;
+      cmsImageErrorText = data.statusText;
+      $("#cms-images").append('<div class="slds-text-heading_medium slds-text-align_left slds-text-color_destructive">' + cmsImageErrorStatus + ': ' + cmsImageErrorText + '</div>');
+    })
+}
+/*
 function getSearch() {
   searchTerm = document.getElementById('search-text').value;
   $("#gif-images").empty();
@@ -43,7 +70,7 @@ function getSearch() {
       $("#gif-images").append('<div class="slds-text-heading_medium slds-text-align_left slds-text-color_destructive">' + trendingErrorStatus + ': ' + trendingErrorText + '</div>');
     })
 }
-
+*/
 // SDK logic to set and retrieve attributes of block
 var sdk = new window.sfdc.BlockSDK({
   tabs: ['stylingblock', 'htmlblock']
@@ -94,10 +121,8 @@ function setImage() {
   scale = document.querySelector('input[name="scale"]:checked').value;
 
   if (scale === "yes") {
-      //sdk.setSuperContent('<div style="text-align: ' + alignment + ';"> <a href="' + link + '"><img style="width: 100%" src="' + imageurl + '" /></a></div><div style="text-align: center"><img src="https://experts-cb-sdk-giphy.herokuapp.com/images/Poweredby_100px-White_VertLogo.png"></div>'); 
     sdk.setContent('<div style="text-align: ' + alignment + ';"> <a href="' + link + '"><img style="width: 100%" src="' + imageurl + '" /></a></div>');
   } else {
-    //sdk.setSuperContent('<div style="text-align: ' + alignment + ';"> <a href="' + link + '"><img style="width: 100%" src="' + imageurl + '" /></a></div><div style="text-align: center"><img src="https://experts-cb-sdk-giphy.herokuapp.com/images/Poweredby_100px-White_VertLogo.png"></div>')
     sdk.setContent('<div style="text-align: ' + alignment + ';"> <a href="' + link + '"><img height="' + height + '" width="' + width + '" src="' + imageurl + '" /></a></div>');
   }
 
@@ -114,8 +139,7 @@ function setImage() {
 sdk.getData(function(data) {
   link = data.link || '';
   width = data.width || '300';
-  height = data.height || '300';
-  //replace fallback url with Salesforce Logo
+  height = data.height || '200';
   imageurl = data.imageurl || 'https://c1.sfdcstatic.com/content/dam/sfdc-docs/www/logos/logo-salesforce.svg';
   alignment = data.alignment || 'center';
   scale = data.scale || 'no';
@@ -151,6 +175,7 @@ document.getElementById("image-scale").addEventListener("change", setImage);
 
 $('#search').on('click',function(){
   getSearch();
+  //getCMSImages();
 });
 //.click(getSearch)  
 

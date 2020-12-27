@@ -27,7 +27,6 @@ app.use('/slds', express.static(__dirname + '/node_modules/@salesforce-ux/design
 app.use('/sfsdk', express.static(__dirname + '/node_modules/blocksdk/'));
 
 
-//app.use('/gjssdk', express.static(__dirname + '/node_modules/giphy-js-sdk-core/'));
 app.use('/', indexRouter);
 app.use('/getCMSImages', getCMSImagesRouter);
 app.use('/getSearch', getSearchRouter);
