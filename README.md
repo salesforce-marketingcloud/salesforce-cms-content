@@ -2,7 +2,7 @@
 # Content Builder SDK - Salesforce CMS Selector
 
 <p align="center">
-  <img src="./images/salesforce-cms-selector.png" width="100%" title="Salesforce CMS Selector">
+  <img src="https://user-images.githubusercontent.com/7657958/103181639-5933bf80-4871-11eb-9d54-4eaf0963351f.png" width="100%" title="Salesforce CMS Selector">
 </p>
 
 ## App Overview
