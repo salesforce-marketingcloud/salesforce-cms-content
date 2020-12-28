@@ -208,7 +208,7 @@ function getCMSContent(req, res, token){
         return [item.title,item]
       });
       var cmsMapArr = new Map(cmsDataArr); // create key value pair from array of array
-      var cmsContent = [...cmsMapArr.values()];//converting back to array from map
+      var cmsContent = [...cmsMapArr.values()];//convert back to array from map
 
       res.send(
         JSON.stringify(cmsContent)
