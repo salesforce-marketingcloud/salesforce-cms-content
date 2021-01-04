@@ -31,7 +31,7 @@ router.get('/', function(req, res) {
 
 function getCMSContent(req, res){  
   getCMSAccessToken(function(cms_access_token){
-    //console.log('getCMSAccessToken: '+cms_access_token);
+//    console.log('getCMSAccessToken: '+cms_access_token);
     var token = cms_access_token;
     var channelResource = true;
     var url = token.instance_url+'/services/data/v50.0/connect/cms/delivery/channels/'+channelID+'/contents/query?pageSize='+limit;
@@ -46,7 +46,6 @@ function getCMSContent(req, res){
           if(JSON.parse(body)[0].message === 'The requested resource does not exist'){
             channelResource = false;
             return res.send(body);
-            //return; 
           }
         } catch (error) {
             console.error('error:', error); // Print the error
@@ -61,12 +60,13 @@ function getCMSContent(req, res){
             var contentType = results.items[x].type;
             for (var p in obj) {
               switch(contentType) {
-                case 'cms_image':
+                case 'cms_document':
                 {    
-                  if( obj.hasOwnProperty(p) && obj[p].mediaType === 'Image') {
+                  if( obj.hasOwnProperty(p) && obj[p].mediaType === 'Document') {
                     if(obj[p].fileName != null && obj[p].unauthenticatedUrl != null){
                       cmsContentObj.push({title: obj.title.value,
                       url: token.instance_url+obj[p].unauthenticatedUrl,
+                      thumburl: obj.thumbUrl.value,
                       contentType: contentType
                       });
                     } 
@@ -75,14 +75,6 @@ function getCMSContent(req, res){
                 }  
                 default:
                 {
-                // if comtent type is NOT cms_image then look for node mediaType === 'Image'
-                  if( obj.hasOwnProperty(p) && obj[p].mediaType === 'Image') {
-                    if(obj[p].title != null && obj[p].unauthenticatedUrl != null){
-                      cmsContentObj.push({title: obj[p].title,
-                      url: token.instance_url+obj[p].unauthenticatedUrl
-                      });
-                    } 
-                  }
                 }  
               }              
             }
@@ -112,9 +104,8 @@ function getCMSAccessToken(callback){
   function(error, cmstoken){
     if(!error){
       callback(cmstoken);
-    }else{
-      console.error('error:', error); // Print the error
     }
+    console.error('error:', error); // Print the error
   });
 }
 

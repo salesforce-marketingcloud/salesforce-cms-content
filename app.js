@@ -8,7 +8,8 @@ var logger = require('morgan');
 
 var indexRouter = require(path.join(path.resolve(),'routes/index'));
 var getCMSImagesRouter = require(path.join(path.resolve(),'routes/getCMSImages'));
-var getSearchRouter = require(path.join(path.resolve(),'routes/getSearch'));
+var getCMSDocumentsRouter = require(path.join(path.resolve(),'routes/getCMSDocuments'));
+var getCMSNewsRouter = require(path.join(path.resolve(),'routes/getCMSNews'));
 
 var app = express();
 
@@ -29,7 +30,8 @@ app.use('/sfsdk', express.static(__dirname + '/node_modules/blocksdk/'));
 
 app.use('/', indexRouter);
 app.use('/getCMSImages', getCMSImagesRouter);
-app.use('/getSearch', getSearchRouter);
+app.use('/getCMSDocuments', getCMSDocumentsRouter);
+app.use('/getCMSNews', getCMSNewsRouter);
 
 
 // catch 404 and forward to error handler

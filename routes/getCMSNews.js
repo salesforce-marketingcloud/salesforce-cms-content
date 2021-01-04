@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var request = require('request');
 var path = require('path');
+let Html5Entities = require('html-entities');
+
 
 //Environment and process.env values
 var clientID = process.env.clientID || '3MVG9Kip4IKAZQEURQLxNTxad_Di6MhEhmmrr.wADSgoWUs7g4GMDBB_eUKA54y5vEc_0BVdZgyKqBGl_FaF4';
@@ -39,7 +41,7 @@ function getCMSContent(req, res){
         url: url,
         method: "GET",
         headers: {
-            'Authorization': 'Bearer '+token.access_token
+            'Authorization': 'Bearer '+token.access_token,
         },
     },function (error, response, body){
         try {
@@ -61,13 +63,16 @@ function getCMSContent(req, res){
             var contentType = results.items[x].type;
             for (var p in obj) {
               switch(contentType) {
-                case 'cms_image':
+                case 'news':
                 {    
-                  if( obj.hasOwnProperty(p) && obj[p].mediaType === 'Image') {
-                    if(obj[p].fileName != null && obj[p].unauthenticatedUrl != null){
+                  if( p === 'bannerImage' && obj.hasOwnProperty(p) && obj[p].mediaType === 'Image') {
+                    if(obj[p].fileName != null){
+                      var tempHtmlBody = Html5Entities.encode(obj.body.value);
                       cmsContentObj.push({title: obj.title.value,
-                      url: token.instance_url+obj[p].unauthenticatedUrl,
-                      contentType: contentType
+                        bannerImage: token.instance_url+obj[p].url,
+                        excerpt : obj.excerpt.value,
+                        htmlBody: Html5Entities.decode(tempHtmlBody), //-- DOES NOT WORK
+                        contentType: contentType  
                       });
                     } 
                   }
@@ -75,14 +80,6 @@ function getCMSContent(req, res){
                 }  
                 default:
                 {
-                // if comtent type is NOT cms_image then look for node mediaType === 'Image'
-                  if( obj.hasOwnProperty(p) && obj[p].mediaType === 'Image') {
-                    if(obj[p].title != null && obj[p].unauthenticatedUrl != null){
-                      cmsContentObj.push({title: obj[p].title,
-                      url: token.instance_url+obj[p].unauthenticatedUrl
-                      });
-                    } 
-                  }
                 }  
               }              
             }
@@ -93,7 +90,7 @@ function getCMSContent(req, res){
           });
           var cmsMapArr = new Map(cmsDataArr); // create key value pair from array of array
           var cmsContent = [...cmsMapArr.values()];//convert back to array from map
-
+          //console.log('cmsContent: '+JSON.stringify(cmsContent));
           res.send(
             JSON.stringify(cmsContent)
           );

@@ -4,13 +4,34 @@
 <body class="slds-m-around_small">
   <% include partials/blockTitle %>
   <div id="block-container">
-    <div class="slds-text-heading_small">Image Configuration</div>
-    <% include partials/imageLink %>
-    <% include partials/imageSliders %>
-    <% include partials/imageSettings %>
-    <hr class="slds-m-around--medium"/>
-    <div class="slds-text-heading_small">Image Selection</div>
-    <div class="slds-form-element slds-p-top_small" id="cms-images"></div>
+    <fieldset class="groupbox-border">
+      <legend class="groupbox-border">Content Configuration</legend>
+      <% include partials/imageLink %>
+      <% include partials/imageSliders %>
+      <% include partials/imageSettings %>
+    </fieldset>
+    <br>
+    <fieldset class="groupbox-border">
+        <legend class="groupbox-border">Content Selection</legend>  
+        <span style="float:right !important";>
+          <span id="images" class="slds-icon_container slds-icon-utility-announcement" title="Images">
+            <svg id="svg-images" class="slds-icon slds-icon-text-success slds-icon_medium" aria-hidden="true">
+              <use xlink:href="slds/assets/icons/utility-sprite/svg/symbols.svg#image"></use>
+            </svg><br><span class="contentType">IMAGES</span>&nbsp;&nbsp;
+          </span>
+          <span id="documents" class="slds-icon_container slds-icon-utility-announcement" title="Documents">
+            <svg id="svg-documents" class="slds-icon slds-icon-text-light slds-icon_medium" aria-hidden="true">
+              <use xlink:href="slds/assets/icons/utility-sprite/svg/symbols.svg#edit_form"></use>
+            </svg><br><span class="contentType">DOCS</span>&nbsp;&nbsp;
+          </span>
+          <span id="news" class="slds-icon_container slds-icon-utility-announcement" title="News">
+            <svg id="svg-news" class="slds-icon slds-icon-text-light slds-icon_medium" aria-hidden="true">
+              <use xlink:href="slds/assets/icons/utility-sprite/svg/symbols.svg#news"></use>
+            </svg><br><span style="display:block" class="contentType">NEWS</span>
+          </span>
+        </span>
+      </fieldset>
+    <div class="slds-grid slds-wrap" style="width:384px" id="cms-images"></div>
   </div>
   <script src="sfsdk/blocksdk.js"></script>
   <script src="javascripts/main.js"></script>

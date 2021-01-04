@@ -2,11 +2,18 @@ html {
   background: #fff !important;
 }
 
-input[type="text"]
+input[type="text"] 
 {
-  color: #3e3e3c !important;
-  font-weight: 400 !important;
+  color: #6e6e6e !important;
+  /*font-weight: 400 !important;*/
   font-size: 0.75rem !important;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+}
+
+.slds-radio_button__label{
+  /*font-weight: 400 !important;*/
+  font-size: 0.75rem !important;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
 }
 
 textarea {
@@ -15,20 +22,74 @@ font-weight: 400 !important;
 font-size: 0.75rem !important;
 }
 
-::placeholder {
+.placeholder{
+  font-size: 0.65rem !important;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+  background-color: #fff;
+  border: 1px solid #dddbda;
+  border-radius: .25rem;
+  width: 100%;
+  -webkit-transition: border .1s linear,background-color .1s linear;
+  transition: border .1s linear,background-color .1s linear;
+  display: inline-block;
+  padding: 0 1rem 0 .75rem;
+  line-height: 1.875rem;
+  min-height: calc(1.875rem + (1px * 2));
+}
+
+::placeholder1 {
 color: #3e3e3c !important;
 font-weight: 400 !important;
 font-size: 0.75rem!important;
 }
 
-.slds-form-element__label, .slds-slider-label__label{
-color: #6e6e6e !important;
-font-weight: 600 !important;
+.slds-form-element__label, .slds-slider-label__label, .slds-slider__value{
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+  color: #3e3e3c !important;
 }
 
 .grow { transition: all .2s ease-in-out; }
 .grow:hover { transform: scale(2); }
 
 .slds-text-heading_small, .slds-text-heading_medium, .slds-text-heading_large{
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+  font-weight: bold !important;
+}
+
+.slds-icon-text-success{
+  fill: #0070d2 !important; /* #2196F3*/
+}
+
+.legend{
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+  font-size: 1.5em !important;
+  font-weight: bold !important;
+  text-align: left !important;
+  width:auto;
+  padding:0px 10px 0px 10px;
+  border-bottom:none;
+}  
+
+fieldset.groupbox-border {
+  border: 1px groove #ddd !important;
+  padding: 0 1.4em 1.4em 1.4em !important;
+  /*margin: 1.2em 1.2em 1.2em 1.2em !important;*/
+  -webkit-box-shadow:  0px 0px 0px 0px #000;
+  box-shadow:  0px 0px 0px 0px #000;
+}
+
+legend.groupbox-border {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+  font-size: 1.2em !important;
   font-weight: 500 !important;
+  text-align: left !important;
+  width:auto;
+  padding:0px 10px 0px 10px;
+  border-bottom:none;
+}
+
+.contentType{
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+  font-size: .3em !important;
+  text-align: center !important;
 }
