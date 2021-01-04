@@ -13,8 +13,9 @@
 * The application was written in Node.js. Express is used as the framework with [EJS](https://github.com/mde/ejs) as the view engine. Leveraged [Salesforce Lightning Design System](https://github.com/salesforce-ux/design-system) for the User Interface, and [Salesforce Marketing Cloud Block SDK](https://github.com/salesforce-marketingcloud/blocksdk) for interacting with Content Builder.
 * 3 Total Routes - 1 View
   * index - home page for app that provides the interface the user will engage with.
-  * getTrending - retrieves the most recent trending gifs as the block initializes.
-  * getSearch - retrieves the gifs based on the user's search.
+  * getCMSDocuments - retrieves cms documents based on the standard cms_document content type for the specified channelId.
+  * getCMSImages - retrieves cms images based on the standard cms_image content type for the specified channelId.
+  * getCMSNews - retrieves cms news based on the standard news content type for the specified channelId.
 
 ## Install In Your Environment
 * Must have a working Heroku Account to host app
