@@ -128,7 +128,9 @@ function setImage() {
     height: height,
     imageurl: imageurl,
     alignment: alignment,
-    scale: scale
+    scale: scale,
+    title: title,
+    htmlBody: htmlBody
   });
 }
 
