@@ -9,14 +9,14 @@
       "description": "Client ID from Salesforce connected app"
     },
     "privateKey": {
-      "description": "Servey key"
+      "description": "Server key"
     },
     "channelID": {
       "description": "Enter Salesforce CMS Channel Id"
     },
     "limit": {
       "description": "Number of results to return, maximum 100.",
-      "value": "50"
+      "value": "25"
     }
   }
 }
