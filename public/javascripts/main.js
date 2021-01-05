@@ -4,7 +4,7 @@ var link, width, height, scale, alignment, imageurl, title, htmlBody, contentTyp
 //$(document).ready(getTrending); //.ready deprecated
 $(function() {
   // Handler for .ready() called.
-  getCMSImages();
+  //getCMSImages();
 });
 
 function getCMSImages() {
@@ -14,7 +14,7 @@ function getCMSImages() {
         $("#cms-images").append('<div class="slds-box slds-theme--error"><strong>Error : </strong>CMS Channel does not exist</div>');
       }else{
         $.each(JSON.parse(data), function(key, value) {
-          $("#cms-images").append('<div class="slds-col slds-size_1-of-3"><img class="slds-p-around_xxx-small grow" sdkimg = "' + value.url + '" src="' + value.url + '" title="'+value.title+'" contentType="'+value.contentType+'" style="width:128px;height:80px"></div>');
+          $("#cms-images").append('<div class="slds-col slds-size_1-of-3"><img class="slds-p-around_xxx-small grow" contentType="'+value.contentType+'" sdkimg = "' + value.url + '" src="' + value.url + '" title="'+value.title+'" style="width:128px;height:80px"></div>');
         })
         $('#cms-images>img').css('cursor', 'pointer');
       }
@@ -34,7 +34,7 @@ function getCMSDocuments() {
         $("#cms-images").append('<div class="slds-box slds-theme--error"><strong>Error : </strong>CMS Channel does not exist</div>');
       }else{
         $.each(JSON.parse(data), function(key, value) {
-          $("#cms-images").append('<div class="slds-col slds-size_1-of-3"><img class="slds-p-around_xxx-small grow" link="'+value.url+'" sdkimg = "' + value.thumburl + '" src="' + value.thumburl + '" title="'+value.title+'" contentType="'+value.contentType+'" style="width:128px;height:80px;"><div class="slds-line-clamp_small">'+value.title+'</div></div>');
+          $("#cms-images").append('<div class="slds-col slds-size_1-of-3"><img class="slds-p-around_xxx-small grow" contentType="'+value.contentType+'" link="'+value.url+'" sdkimg = "' + value.thumburl + '" src="' + value.thumburl + '" title="'+value.title+'" style="width:128px;height:80px;"><div class="slds-line-clamp_small">'+value.title+'</div></div>');
         })
         $('#cms-images>img').css('cursor', 'pointer');
       }
@@ -53,7 +53,7 @@ function getCMSNews() {
         $("#cms-images").append('<div class="slds-box slds-theme--error"><strong>Error : </strong>CMS Channel does not exist</div>');
       }else{
         $.each(JSON.parse(data), function(key, value) {
-         $("#cms-images").append('<div class="slds-col slds-size_1-of-2"><img class="slds-p-around_xxx-small grow" link="" sdkimg = "' + value.bannerImage + '" src="' + value.bannerImage + '" htmlBody="'+value.htmlBody+'" title="'+value.title+'" contentType="'+value.contentType+'" style="width:188px;height:140px;"><div class="slds-line-clamp_small">'+value.excerpt+'</div></div>');
+         $("#cms-images").append('<div class="slds-col slds-size_1-of-2"><img class="slds-p-around_xxx-small grow" contentType="'+value.contentType+'" link="" sdkimg = "' + value.bannerImage + '" src="' + value.bannerImage + '" htmlBody="'+value.htmlBody+'" title="'+value.title+'" style="width:188px;height:140px;"><div class="slds-line-clamp_small">'+value.excerpt+'</div></div>');
          })
         $('#cms-images>img').css('cursor', 'pointer');
       }
@@ -123,6 +123,7 @@ function setImage() {
   }
 
   sdk.setData({
+    contentType: contentType,
     link: link,
     width: width,
     height: height,
@@ -143,6 +144,12 @@ sdk.getData(function(data) {
   scale = data.scale || 'no';
   title = data.title || '';
   htmlBody = data.htmlBody || '';
+  contentType = data.contentType || '';
+  //Set contentType to selected and load content in selector panel if user clicks within the block or edits the content
+  if(contentType !== 'undefined'){
+    contentType= '#'+contentType;
+    $(contentType).trigger('click');
+  }
   blockSettings();
   setImage();
 });
@@ -181,7 +188,7 @@ $('#news').on('click',function(){
   getCMSNews();
 });
 
-$('#documents').on('click',function(){
+$('#cms_document').on('click',function(){
   $('#cms-images').empty();
   $('#image-link').val('');
   resetClassName("#svg-documents");
@@ -189,7 +196,7 @@ $('#documents').on('click',function(){
   getCMSDocuments();
 });
 
-$('#images').on('click',function(){
+$('#cms_image').on('click',function(){
   $('#cms-images').empty();
   $('#image-link').val('');
   resetClassName("#svg-images");
@@ -203,9 +210,10 @@ $('body').on('click', 'img', function() {
   //display title for contentType news and cms_documents
   title = $(this).attr('contentType')!= 'cms_image' ? $(this).attr('title') : ''; //$(this).attr('title') || '';
   htmlBody = $(this).attr('htmlBody') || '';
+  contentType = $(this).attr('contentType') || '';
   setImage();
 })
-
+/*
 function disableImageOptions() {
   document.getElementById('image-link').disabled = true; 
   document.getElementById('scale-yes').setAttribute("disabled", "");
@@ -227,7 +235,7 @@ function enableImageOptions() {
   document.getElementById('image-center').removeAttribute("disabled");
   document.getElementById('image-right').removeAttribute("disabled");
 }
-
+*/
 function resetClassName(htmlEle){
   let cssElements = ['#svg-documents','#svg-images','#svg-news'];
   cssElements.forEach(cssEle =>{
