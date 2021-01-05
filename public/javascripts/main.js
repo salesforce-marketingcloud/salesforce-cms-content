@@ -184,7 +184,6 @@ $('#news').on('click',function(){
   $('#cms-images').empty();
   $('#image-link').val('');
   resetClassName("#svg-news");
-  //disableImageOptions();
   getCMSNews();
 });
 
@@ -192,7 +191,6 @@ $('#cms_document').on('click',function(){
   $('#cms-images').empty();
   $('#image-link').val('');
   resetClassName("#svg-documents");
-  //disableImageOptions();
   getCMSDocuments();
 });
 
@@ -200,7 +198,6 @@ $('#cms_image').on('click',function(){
   $('#cms-images').empty();
   $('#image-link').val('');
   resetClassName("#svg-images");
-  //enableImageOptions();
   getCMSImages();
 });
 
@@ -213,29 +210,7 @@ $('body').on('click', 'img', function() {
   contentType = $(this).attr('contentType') || '';
   setImage();
 })
-/*
-function disableImageOptions() {
-  document.getElementById('image-link').disabled = true; 
-  document.getElementById('scale-yes').setAttribute("disabled", "");
-  document.getElementById('scale-no').setAttribute("disabled", "");
-  document.getElementById('slider-image-height').setAttribute("disabled", "");
-  document.getElementById('slider-image-width').setAttribute("disabled", "");
-  document.getElementById('image-left').setAttribute("disabled", "");
-  document.getElementById('image-center').setAttribute("disabled", "");
-  document.getElementById('image-right').setAttribute("disabled", "");
-}
 
-function enableImageOptions() {
-  document.getElementById('image-link').disabled = false;
-  document.getElementById('scale-yes').removeAttribute("disabled");
-  document.getElementById('scale-no').removeAttribute("disabled");
-  document.getElementById('slider-image-height').removeAttribute("disabled");
-  document.getElementById('slider-image-width').removeAttribute("disabled");
-  document.getElementById('image-left').removeAttribute("disabled");
-  document.getElementById('image-center').removeAttribute("disabled");
-  document.getElementById('image-right').removeAttribute("disabled");
-}
-*/
 function resetClassName(htmlEle){
   let cssElements = ['#svg-documents','#svg-images','#svg-news'];
   cssElements.forEach(cssEle =>{
