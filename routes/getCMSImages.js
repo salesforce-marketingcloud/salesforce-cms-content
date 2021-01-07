@@ -9,7 +9,7 @@ var limit = process.env.limit || "25"; //page size 25
 var environment = process.env.NODE_ENV || 'development';
 var channelID = process.env.channelID || '0ap3h000000LlA6AAK';
 var envprivateKey;
-var contentType = '';
+var contentType = 'cms_image';
 cmsContent = [];
 
 if(environment === 'development'){
@@ -34,7 +34,8 @@ function getCMSContent(req, res){
     //console.log('getCMSAccessToken: '+cms_access_token);
     var token = cms_access_token;
     var channelResource = true;
-    var url = token.instance_url+'/services/data/v50.0/connect/cms/delivery/channels/'+channelID+'/contents/query?pageSize='+limit;
+    var url = token.instance_url+'/services/data/v50.0/connect/cms/delivery/channels/'+channelID+'/contents/query?managedContentType='+contentType+'&pageSize='+limit;
+    console.log('URL :'+url);
     request({
         url: url,
         method: "GET",
@@ -58,33 +59,16 @@ function getCMSContent(req, res){
           var cmsContentObj = [];
           for(var x=0; x<results.items.length; x++){
             var obj = results.items[x].contentNodes;
-            var contentType = results.items[x].type;
+            //var contentType = results.items[x].type;
             for (var p in obj) {
-              switch(contentType) {
-                case 'cms_image':
-                {    
-                  if( obj.hasOwnProperty(p) && obj[p].mediaType === 'Image') {
-                    if(obj[p].fileName != null && obj[p].unauthenticatedUrl != null){
-                      cmsContentObj.push({title: obj.title.value,
-                      url: token.instance_url+obj[p].unauthenticatedUrl,
-                      contentType: contentType
-                      });
-                    } 
-                  }
-                  break;
-                }  
-                default:
-                {
-                // if comtent type is NOT cms_image then look for node mediaType === 'Image'
-                  if( obj.hasOwnProperty(p) && obj[p].mediaType === 'Image') {
-                    if(obj[p].title != null && obj[p].unauthenticatedUrl != null){
-                      cmsContentObj.push({title: obj[p].title,
-                      url: token.instance_url+obj[p].unauthenticatedUrl
-                      });
-                    } 
-                  }
-                }  
-              }              
+              if( obj.hasOwnProperty(p) && obj[p].mediaType === 'Image') {
+                if(obj[p].fileName != null && obj[p].unauthenticatedUrl != null){
+                  cmsContentObj.push({title: obj.title.value,
+                  url: token.instance_url+obj[p].unauthenticatedUrl,
+                  contentType: contentType
+                  });
+                } 
+              }
             }
           }
           //convert cmsContentObj data to a map to remove duplicates

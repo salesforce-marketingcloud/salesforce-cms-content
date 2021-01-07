@@ -1,5 +1,4 @@
-var cmsImageErrorStatus, cmsImageErrorText, imageurl, searchTerm;
-var link, width, height, scale, alignment, imageurl, title, htmlBody, contentType;
+var cmsImageErrorStatus, cmsImageErrorText, searchTerm, link, width, height, scale, alignment, imageurl, title, htmlBody, contentType;
 
 //$(document).ready(getTrending); //.ready deprecated
 $(function() {
@@ -14,11 +13,10 @@ function getCMSImages() {
         $("#cms-images").append('<div class="slds-box slds-theme--error"><strong>Error : </strong>CMS Channel does not exist</div>');
       }else{
         $.each(JSON.parse(data), function(key, value) {
-          $("#cms-images").append('<div class="slds-col slds-size_1-of-3"><img class="slds-p-around_xxx-small grow" contentType="'+value.contentType+'" sdkimg = "' + value.url + '" src="' + value.url + '" title="'+value.title+'" style="width:128px;height:80px"></div>');
+          $("#cms-images").append('<div class="slds-col slds-size_1-of-3"><img class="slds-p-around_xxx-small grow" link="" contentType="'+value.contentType+'" sdkimg = "' + value.url + '" src="' + value.url + '" title="'+value.title+'" style="width:128px;height:80px"></div>');
         })
         $('#cms-images>img').css('cursor', 'pointer');
       }
-      $('#image-link').val('');
     })
     .fail(function(data) {
       cmsImageErrorStatus = data.status;
@@ -53,7 +51,7 @@ function getCMSNews() {
         $("#cms-images").append('<div class="slds-box slds-theme--error"><strong>Error : </strong>CMS Channel does not exist</div>');
       }else{
         $.each(JSON.parse(data), function(key, value) {
-         $("#cms-images").append('<div class="slds-col slds-size_1-of-2"><img class="slds-p-around_xxx-small grow" contentType="'+value.contentType+'" link="" sdkimg = "' + value.bannerImage + '" src="' + value.bannerImage + '" htmlBody="'+value.htmlBody+'" title="'+value.title+'" style="width:188px;height:140px;"><div class="slds-line-clamp_small">'+value.excerpt+'</div></div>');
+         $("#cms-images").append('<div class="slds-col slds-size_1-of-2"><img class="slds-p-around_xxx-small grow" link="" contentType="'+value.contentType+'" sdkimg = "' + value.bannerImage + '" src="' + value.bannerImage + '" htmlBody="'+value.htmlBody+'" title="'+value.title+'" style="width:188px;height:140px;"><div class="slds-line-clamp_small">'+value.excerpt+'</div></div>');
          })
         $('#cms-images>img').css('cursor', 'pointer');
       }
@@ -72,7 +70,6 @@ var sdk = new window.sfdc.BlockSDK({
 
 
 function blockSettings() {
-  document.getElementById('image-link').value = link;
   document.getElementById('slider-image-width').value = width;
   document.getElementById('slider-image-height').value = height;
   document.getElementById('slider-image-width-val').innerHTML = width;
@@ -107,19 +104,25 @@ function sliderValues() {
 }
 
 function setImage() {
-  if(link==''){
-    link = document.getElementById('image-link').value;
+  //does user want a custom link wrap for their image? 
+  if(document.getElementById('image-link').value != ''){
+    link = document.getElementById('image-link').value;  
   }
   width = document.getElementById('slider-image-width').value;
   height = document.getElementById('slider-image-height').value;
   alignment = document.querySelector('input[name="alignment"]:checked').value;
   scale = document.querySelector('input[name="scale"]:checked').value;
 
-  if (scale === "yes") {
+  //does user want the image to scale? - include a href or exclude based on link value
+  if (scale === "yes" && link !='') {
     //sdk.setContent('<div style="text-align: ' + alignment + ';"> <a href="' + link + '"><img style="width: 100%" src="' + imageurl + '" /></a></div>');
     sdk.setContent('<div style="font-size: 0.85rem !important;font-family:Helvetica,Arial,sans-serif !important;text-align: ' + alignment + ';"> <a href="' + link + '"><img style="width: 100%" src="' + imageurl + '" /></a><br>'+title+'<br><br>'+htmlBody+'</div>');
-  } else {
-    sdk.setContent('<div style="font-size: 0.85rem !important;font-family:Helvetica,Arial,sans-serif !important;text-align: ' + alignment + ';"> <a href="' + link + '"><img height="' + height + '" width="' + width + '" src="' + imageurl + '" /></a><br>'+title+'<br><br>'+htmlBody+'</div>');
+  } else if (scale === "yes" && link ==='') {
+    sdk.setContent('<div style="font-size: 0.85rem !important;font-family:Helvetica,Arial,sans-serif !important;text-align: ' + alignment + ';"><img style="width: 100%" src="' + imageurl + '" /><br>'+title+'<br><br>'+htmlBody+'</div>');
+  } else if (scale === "no" && link !='') {
+    sdk.setContent('<div style="font-size: 0.85rem !important;font-family:Helvetica,Arial,sans-serif !important;text-align: ' + alignment + ';"><a href="' + link + '"><img height="' + height + '" width="' + width + '" src="' + imageurl + '" /></a><br>'+title+'<br><br>'+htmlBody+'</div>');
+  } else if (scale === "no" && link ==='') {
+    sdk.setContent('<div style="font-size: 0.85rem !important;font-family:Helvetica,Arial,sans-serif !important;text-align: ' + alignment + ';"><img height="' + height + '" width="' + width + '" src="' + imageurl + '" /><br>'+title+'<br><br>'+htmlBody+'</div>');
   }
 
   sdk.setData({
@@ -140,15 +143,16 @@ sdk.getData(function(data) {
   width = data.width || '300';
   height = data.height || '200';
   imageurl = data.imageurl || 'https://c1.sfdcstatic.com/content/dam/sfdc-docs/www/logos/logo-salesforce.svg';
-  alignment = data.alignment || 'center';
+  alignment = data.alignment || 'left';
   scale = data.scale || 'no';
   title = data.title || '';
   htmlBody = data.htmlBody || '';
   contentType = data.contentType || '';
-  //Set contentType to selected and load content in selector panel if user clicks within the block or edits the content
-  if(contentType !== 'undefined'){
-    contentType= '#'+contentType;
-    $(contentType).trigger('click');
+  //Set contentType to selected and load content in selector panel if user clicks within the block
+  if(contentType==='' || contentType === 'undefined'){
+  }else{
+    var contentDataType= '#'+contentType;
+    $(contentDataType).trigger('click');
   }
   blockSettings();
   setImage();
@@ -180,25 +184,23 @@ document.getElementById("image-link").addEventListener("change", setImage);
 document.getElementById("image-alignment").addEventListener("change", setImage);
 document.getElementById("image-scale").addEventListener("change", setImage);
 
-$('#news').on('click',function(){
+//Get content based on contentType via user click of icons
+$('#cms_image').on('click',function(){
   $('#cms-images').empty();
-  $('#image-link').val('');
-  resetClassName("#svg-news");
-  getCMSNews();
+  resetClassName("#svg-images");
+  getCMSImages();
 });
 
 $('#cms_document').on('click',function(){
   $('#cms-images').empty();
-  $('#image-link').val('');
   resetClassName("#svg-documents");
   getCMSDocuments();
 });
 
-$('#cms_image').on('click',function(){
+$('#news').on('click',function(){
   $('#cms-images').empty();
-  $('#image-link').val('');
-  resetClassName("#svg-images");
-  getCMSImages();
+  resetClassName("#svg-news");
+  getCMSNews();
 });
 
 $('body').on('click', 'img', function() {

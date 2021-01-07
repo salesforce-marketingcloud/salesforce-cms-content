@@ -9,7 +9,7 @@ var limit = process.env.limit || "25"; //page size 25
 var environment = process.env.NODE_ENV || 'development';
 var channelID = process.env.channelID || '0ap3h000000LlA6AAK';
 var envprivateKey;
-var contentType = '';
+var contentType = 'cms_document';
 cmsContent = [];
 
 if(environment === 'development'){
@@ -34,7 +34,7 @@ function getCMSContent(req, res){
 //    console.log('getCMSAccessToken: '+cms_access_token);
     var token = cms_access_token;
     var channelResource = true;
-    var url = token.instance_url+'/services/data/v50.0/connect/cms/delivery/channels/'+channelID+'/contents/query?pageSize='+limit;
+    var url = token.instance_url+'/services/data/v50.0/connect/cms/delivery/channels/'+channelID+'/contents/query?managedContentType='+contentType+'&pageSize='+limit;
     request({
         url: url,
         method: "GET",
@@ -59,24 +59,15 @@ function getCMSContent(req, res){
             var obj = results.items[x].contentNodes;
             var contentType = results.items[x].type;
             for (var p in obj) {
-              switch(contentType) {
-                case 'cms_document':
-                {    
-                  if( obj.hasOwnProperty(p) && obj[p].mediaType === 'Document') {
-                    if(obj[p].fileName != null && obj[p].unauthenticatedUrl != null){
-                      cmsContentObj.push({title: obj.title.value,
-                      url: token.instance_url+obj[p].unauthenticatedUrl,
-                      thumburl: obj.thumbUrl.value,
-                      contentType: contentType
-                      });
-                    } 
-                  }
-                  break;
-                }  
-                default:
-                {
-                }  
-              }              
+              if( obj.hasOwnProperty(p) && obj[p].mediaType === 'Document') {
+                if(obj[p].fileName != null && obj[p].unauthenticatedUrl != null){
+                  cmsContentObj.push({title: obj.title.value,
+                  url: token.instance_url+obj[p].unauthenticatedUrl,
+                  thumburl: obj.thumbUrl.value,
+                  contentType: contentType
+                  });
+                } 
+              }
             }
           }
           //convert cmsContentObj data to a map to remove duplicates
@@ -85,7 +76,6 @@ function getCMSContent(req, res){
           });
           var cmsMapArr = new Map(cmsDataArr); // create key value pair from array of array
           var cmsContent = [...cmsMapArr.values()];//convert back to array from map
-
           res.send(
             JSON.stringify(cmsContent)
           );
