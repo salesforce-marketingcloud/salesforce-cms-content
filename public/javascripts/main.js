@@ -221,6 +221,7 @@ function resetClassName(htmlEle){
   cssElements.forEach(cssEle =>{
     if(cssEle===htmlEle){
       if(!$(htmlEle).hasClass("slds-icon-text-success")){
+        $(htmlEle).removeClass("slds-icon-text-light");
         $(htmlEle).addClass("slds-icon-text-success");
       }
     }else{
