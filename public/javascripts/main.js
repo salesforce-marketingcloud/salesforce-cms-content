@@ -15,7 +15,7 @@ function getCMSImages() {
         $.each(JSON.parse(data), function(key, value) {
           $("#cms-images").append('<div class="slds-col slds-size_1-of-3"><img class="slds-p-around_xxx-small grow" link="" contentType="'+value.contentType+'" sdkimg = "' + value.url + '" src="' + value.url + '" title="'+value.title+'" style="width:128px;height:80px"></div>');
         })
-        $('#cms-images>img').css('cursor', 'pointer');
+        $('#cms-images>div>img').css('cursor', 'pointer');
       }
     })
     .fail(function(data) {
@@ -34,7 +34,7 @@ function getCMSDocuments() {
         $.each(JSON.parse(data), function(key, value) {
           $("#cms-images").append('<div class="slds-col slds-size_1-of-3"><img class="slds-p-around_xxx-small grow" contentType="'+value.contentType+'" link="'+value.url+'" sdkimg = "' + value.thumburl + '" src="' + value.thumburl + '" title="'+value.title+'" style="width:128px;height:80px;"><div class="slds-line-clamp_small">'+value.title+'</div></div>');
         })
-        $('#cms-images>img').css('cursor', 'pointer');
+        $('#cms-images>div>img').css('cursor', 'pointer');
       }
     })
     .fail(function(data) {
@@ -53,7 +53,7 @@ function getCMSNews() {
         $.each(JSON.parse(data), function(key, value) {
          $("#cms-images").append('<div class="slds-col slds-size_1-of-2"><img class="slds-p-around_xxx-small grow" link="" contentType="'+value.contentType+'" sdkimg = "' + value.bannerImage + '" src="' + value.bannerImage + '" htmlBody="'+value.htmlBody+'" title="'+value.title+'" style="width:188px;height:140px;"><div class="slds-line-clamp_small">'+value.excerpt+'</div></div>');
          })
-        $('#cms-images>img').css('cursor', 'pointer');
+        $('#cms-images>div>img').css('cursor', 'pointer');
       }
     })
     .fail(function(data) {
@@ -95,6 +95,9 @@ function blockSettings() {
     document.getElementById('image-center').setAttribute("checked", "checked");
     document.getElementById('image-right').removeAttribute("checked");
   }
+  $('#cms_image').css('cursor', 'pointer');
+  $('#cms_document').css('cursor', 'pointer');
+  $('#news').css('cursor', 'pointer');
   disableOptions();
 }
 
