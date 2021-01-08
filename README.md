@@ -28,6 +28,6 @@
 * Create an Installed Package and add a component type of Custom Content Block. Use the Heroku app URL as the Endpoint URL when configuring this component.
 
 
-<a href="https://www.heroku.com/deploy/?template=https://github.com/raj-rao/cmscontentdemo.git">
+<a href="https://www.heroku.com/deploy/?template=https://github.com/raj-rao/salesforce-cms-content.git">
   <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
 </a>
