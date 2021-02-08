@@ -40,6 +40,7 @@ function getCMSContent(req, res){
     //set boolean in getCMSAccessToken function, if getCMSAccessToken is true then process else set JSON.parse(body)[0].message === 'The CMS User is not authorized to access the requested resources')
     //return res.send(body);
     if(cmsJWTToken == false){
+      console.log('MESSAGE: '+JSON.parse(body)[0].message);
       JSON.parse(body)[0].message === 'The CMS User is not authorized to access the requested resources';
       return res.send(body);
     }
