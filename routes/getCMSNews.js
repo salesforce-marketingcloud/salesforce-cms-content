@@ -14,6 +14,7 @@ var envprivateKey;
 var contentType = 'news';
 var cmsUSER = process.env.cmsUSER || 'cmsuser@cms.demo';
 var cmsAUD = process.env.cmsAUDIENCE || 'https://login.salesforce.com';
+var cmsJWTToken = false;
 cmsContent = [];
 
 if(environment === 'development'){
@@ -38,7 +39,10 @@ function getCMSContent(req, res){
     //console.log('getCMSAccessToken: '+cms_access_token);
     //set boolean in getCMSAccessToken function, if getCMSAccessToken is true then process else set JSON.parse(body)[0].message === 'The CMS User is not authorized to access the requested resources')
     //return res.send(body);
-    
+    if(cmsJWTToken == false){
+      JSON.parse(body)[0].message === 'The CMS User is not authorized to access the requested resources';
+      return res.send(body);
+    }
     var token = cms_access_token;
     var channelResource = true;
     var url = token.instance_url+'/services/data/v50.0/connect/cms/delivery/channels/'+channelID+'/contents/query?managedContentType='+contentType+'&pageSize='+limit;
@@ -105,8 +109,10 @@ function getCMSAccessToken(callback){
   },
   function(error, cmstoken){
     if(!error){
+      cmsJWTToken = true;
       callback(cmstoken);
     }else{
+      cmsJWTToken = false;
       console.error('error:', error); // Print the error
     }
   });
