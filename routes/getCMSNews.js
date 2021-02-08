@@ -54,8 +54,13 @@ function getCMSContent(req, res){
             'Authorization': 'Bearer '+token.access_token,
         },
     },function (error, response, body){
-        console.log('MESSAGE: '+error);
+        //console.log('MESSAGE: '+error);
         try {
+          if(JSON.parse(body)[0].message === 'Failed to load resource'){
+            channelResource = false;
+            return res.send(body);
+            //return; 
+          }
           if(JSON.parse(body)[0].message === 'The requested resource does not exist'){
             channelResource = false;
             return res.send(body);
