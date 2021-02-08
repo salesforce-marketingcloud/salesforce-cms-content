@@ -12,6 +12,8 @@ var environment = process.env.NODE_ENV || 'development';
 var channelID = process.env.channelID || '0ap3h000000LlA6AAK';
 var envprivateKey;
 var contentType = 'news';
+var cmsUSER = process.env.cmsUSER || 'cmsuser@cms.demo';
+var cmsAUD = process.env.cmsAUDIENCE || 'https://login.salesforce.com';
 cmsContent = [];
 
 if(environment === 'development'){
@@ -34,6 +36,9 @@ router.get('/', function(req, res) {
 function getCMSContent(req, res){  
   getCMSAccessToken(function(cms_access_token){
     //console.log('getCMSAccessToken: '+cms_access_token);
+    //set boolean in getCMSAccessToken function, if getCMSAccessToken is true then process else set JSON.parse(body)[0].message === 'The CMS User is not authorized to access the requested resources')
+    //return res.send(body);
+    
     var token = cms_access_token;
     var channelResource = true;
     var url = token.instance_url+'/services/data/v50.0/connect/cms/delivery/channels/'+channelID+'/contents/query?managedContentType='+contentType+'&pageSize='+limit;
@@ -92,8 +97,10 @@ function getCMSContent(req, res){
 function getCMSAccessToken(callback){
   var cmstoken = jwt.getToken({  
     iss: clientID, //YOUR_CONNECTED_APP_CLIENT_ID
-    sub: "raj@cmsworkshopmasterorg.demo", //YOUR_SALESFORCE_USERNAME
-    aud: "https://login.salesforce.com", //YOUR_AUDIENCE
+    //sub: "raj@cmsworkshopmasterorg.demo", //YOUR_SALESFORCE_USERNAME
+    //aud: "https://login.salesforce.com", //YOUR_AUDIENCE
+    sub: cmsUSER, //SALESFORCE_CMS_USERNAME
+    aud: cmsAUD, //YOUR_AUDIENCE
     privateKey: privateKey //PrivateKey from lib/cmsserver.key if environment = development
   },
   function(error, cmstoken){
