@@ -14,8 +14,7 @@ var envprivateKey;
 var contentType = 'news';
 var cmsUSER = process.env.cmsUSER || 'cmsuser@cms.demo';
 var cmsAUD = process.env.cmsAUDIENCE || 'https://login.salesforce.com';
-var cmsJWTToken = false;
-cmsContent = [];
+//cmsContent = [];
 
 if(environment === 'development'){
   const   fs = require('fs')
@@ -56,11 +55,6 @@ function getCMSContent(req, res){
     },function (error, response, body){
         //console.log('MESSAGE: '+error);
         try {
-          if(JSON.parse(body)[0].message === 'Failed to load resource'){
-            channelResource = false;
-            return res.send(body);
-            //return; 
-          }
           if(JSON.parse(body)[0].message === 'The requested resource does not exist'){
             channelResource = false;
             return res.send(body);
@@ -116,10 +110,8 @@ function getCMSAccessToken(callback){
   },
   function(error, cmstoken){
     if(!error){
-      cmsJWTToken = true;
       callback(cmstoken);
     }else{
-      cmsJWTToken = false;
       console.error('error:', error); // Print the error
     }
   });
