@@ -39,11 +39,11 @@ function getCMSContent(req, res){
     //console.log('getCMSAccessToken: '+cms_access_token);
     //set boolean in getCMSAccessToken function, if getCMSAccessToken is true then process else set JSON.parse(body)[0].message === 'The CMS User is not authorized to access the requested resources')
     //return res.send(body);
-    if(cmsJWTToken == false){
+    /*if(cmsJWTToken == false){
       console.log('MESSAGE: '+JSON.parse(body)[0].message);
       JSON.parse(body)[0].message === 'The CMS User is not authorized to access the requested resources';
       return res.send(body);
-    }
+    }*/
     var token = cms_access_token;
     var channelResource = true;
     var url = token.instance_url+'/services/data/v50.0/connect/cms/delivery/channels/'+channelID+'/contents/query?managedContentType='+contentType+'&pageSize='+limit;
@@ -54,6 +54,7 @@ function getCMSContent(req, res){
             'Authorization': 'Bearer '+token.access_token,
         },
     },function (error, response, body){
+        console.log('MESSAGE: '+JSON.parse(body)[0].message);
         try {
           if(JSON.parse(body)[0].message === 'The requested resource does not exist'){
             channelResource = false;
