@@ -54,7 +54,7 @@ function getCMSContent(req, res){
             'Authorization': 'Bearer '+token.access_token,
         },
     },function (error, response, body){
-        console.log('MESSAGE: '+JSON.parse(body)[0].message);
+        console.log('MESSAGE: '+error);
         try {
           if(JSON.parse(body)[0].message === 'The requested resource does not exist'){
             channelResource = false;
