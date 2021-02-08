@@ -9,8 +9,9 @@ var limit = process.env.limit || "25"; //page size 25
 var environment = process.env.NODE_ENV || 'development';
 var channelID = process.env.channelID || '0ap3h000000LlA6AAK';
 var envprivateKey;
+var cmsUSER = process.env.cmsUSER || 'cmsuser@cms.demo'; //Salesforce CMS Username 
+var cmsAUD = process.env.cmsAUDIENCE || 'https://login.salesforce.com';
 var contentType = 'cms_document';
-cmsContent = [];
 
 if(environment === 'development'){
   const   fs = require('fs')
@@ -87,8 +88,8 @@ function getCMSContent(req, res){
 function getCMSAccessToken(callback){
   var cmstoken = jwt.getToken({  
     iss: clientID, //YOUR_CONNECTED_APP_CLIENT_ID
-    sub: "raj@cmsworkshopmasterorg.demo", //YOUR_SALESFORCE_USERNAME
-    aud: "https://login.salesforce.com", //YOUR_AUDIENCE
+    sub: cmsUSER, //SALESFORCE_CMS_USERNAME
+    aud: cmsAUD, //YOUR_AUDIENCE
     privateKey: privateKey //PrivateKey from lib/cmsserver.key if environment = development
   },
   function(error, cmstoken){
