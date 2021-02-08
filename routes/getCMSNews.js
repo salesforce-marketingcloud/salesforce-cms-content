@@ -12,7 +12,7 @@ var environment = process.env.NODE_ENV || 'development';
 var channelID = process.env.channelID || '0ap3h000000LlA6AAK';
 var envprivateKey;
 var contentType = 'news';
-var cmsUSER = process.env.cmsUSER || 'cmsuser@cms.demo';
+var cmsUSER = process.env.cmsUSER || 'cmsuser@cms.demo'; //Salesforce CMS Username 
 var cmsAUD = process.env.cmsAUDIENCE || 'https://login.salesforce.com';
 //cmsContent = [];
 
