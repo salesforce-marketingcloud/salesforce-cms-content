@@ -59,6 +59,10 @@ function getCMSContent(req, res){
           for(var x=0; x<results.items.length; x++){
             var obj = results.items[x].contentNodes;
             var contentType = results.items[x].type;
+            //set excerpt and body if null/undefined
+            if(obj.hasOwnProperty('thumbUrl') == false){
+              obj.thumbUrl= {nodeType: 'Url', value: ''};
+            }
             for (var p in obj) {
               if( obj.hasOwnProperty(p) && obj[p].mediaType === 'Document') {
                 if(obj[p].fileName != null && obj[p].unauthenticatedUrl != null){
