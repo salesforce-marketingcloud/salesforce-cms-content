@@ -58,17 +58,14 @@ function getCMSContent(req, res){
         if(channelResource){
           results = JSON.parse(body);
           var cmsContentObj = [];
-          return res.send('RESULTS LENGTH: '+results.items.length);
           for(var x=0; x<results.items.length; x++){
             var obj = results.items[x].contentNodes;
             //set excerpt and body if null/undefined
             if(obj.hasOwnProperty('excerpt') == false){
-              console.log('EXCERPT: FALSE');
-              obj.excerpt= {nodeType: 'MultilineText', value: ''};
+              obj.excerpt= {nodeType: 'MultilineText', value: 'EXCERPT INJECTED'};
             }
             if(obj.hasOwnProperty('body') == false){
-              console.log('BODY: FALSE');
-              obj.body= {nodeType: 'RichText', value: ''};
+              obj.body= {nodeType: 'RichText', value: 'BODY INJECTED'};
             }
             var contentType = results.items[x].type;
             for (var p in obj) {
