@@ -60,6 +60,13 @@ function getCMSContent(req, res){
           var cmsContentObj = [];
           for(var x=0; x<results.items.length; x++){
             var obj = results.items[x].contentNodes;
+            //set excerpt and body if null/undefined
+            if(obj.hasOwnProperty('excerpt') == false){
+              obj.excerpt= {nodeType: 'MultilineText', value: ''};
+            }
+            if(obj.hasOwnProperty('body') == false){
+              obj.excerpt= {nodeType: 'RichText', value: ''};
+            }
             var contentType = results.items[x].type;
             for (var p in obj) {
               if( p === 'bannerImage' && obj.hasOwnProperty(p) && obj[p].mediaType === 'Image') {
