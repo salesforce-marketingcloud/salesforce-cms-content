@@ -62,9 +62,11 @@ function getCMSContent(req, res){
             var obj = results.items[x].contentNodes;
             //set excerpt and body if null/undefined
             if(obj.hasOwnProperty('excerpt') == false){
+              console.log('EXCERPT: FALSE');
               obj.excerpt= {nodeType: 'MultilineText', value: ''};
             }
             if(obj.hasOwnProperty('body') == false){
+              console.log('BODY: FALSE');
               obj.body= {nodeType: 'RichText', value: ''};
             }
             var contentType = results.items[x].type;
