@@ -62,10 +62,10 @@ function getCMSContent(req, res){
             var obj = results.items[x].contentNodes;
             //set excerpt and body if null/undefined
             if(obj.hasOwnProperty('excerpt') == false){
-              obj.excerpt= {nodeType: 'MultilineText', value: 'EXCERPT INJECTED'};
+              obj.excerpt= {nodeType: 'MultilineText', value: ''};
             }
             if(obj.hasOwnProperty('body') == false){
-              obj.body= {nodeType: 'RichText', value: 'BODY INJECTED'};
+              obj.body= {nodeType: 'RichText', value: ''};
             }
             var contentType = results.items[x].type;
             for (var p in obj) {
