@@ -65,7 +65,7 @@ function getCMSContent(req, res){
               obj.excerpt= {nodeType: 'MultilineText', value: ''};
             }
             if(obj.hasOwnProperty('body') == false){
-              obj.excerpt= {nodeType: 'RichText', value: ''};
+              obj.body= {nodeType: 'RichText', value: ''};
             }
             var contentType = results.items[x].type;
             for (var p in obj) {
