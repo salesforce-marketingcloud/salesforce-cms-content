@@ -11,8 +11,8 @@ var limit = process.env.limit || "25"; //page size 25
 var environment = process.env.NODE_ENV || 'development';
 var channelID = process.env.channelID || '0ap3h000000LlA6AAK';
 var envprivateKey;
-var cmsUSER = process.env.cmsUSER || 'cmsuser@cms.demo'; //Salesforce CMS Username 
-var cmsAUD = process.env.cmsAUDIENCE || 'https://login.salesforce.com';
+var cmsUSER = process.env.cmsUser || 'cmsuser@cms.demo'; //Salesforce CMS Username 
+var cmsAUD = process.env.cmsAudience || 'https://login.salesforce.com';
 var contentType = 'news';
 
 if(environment === 'development'){
