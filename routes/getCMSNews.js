@@ -34,7 +34,6 @@ router.get('/', function(req, res) {
 
 function getCMSContent(req, res){  
   getCMSAccessToken(function(cms_access_token){
-    //console.log('getCMSAccessToken: '+cms_access_token);
     var token = cms_access_token;
     var channelResource = true;
     var url = token.instance_url+'/services/data/v50.0/connect/cms/delivery/channels/'+channelID+'/contents/query?managedContentType='+contentType+'&pageSize='+limit;
@@ -100,8 +99,8 @@ function getCMSContent(req, res){
 function getCMSAccessToken(callback){
   var cmstoken = jwt.getToken({  
     iss: clientID, //YOUR_CONNECTED_APP_CLIENT_ID
-    sub: cmsUSER, //SALESFORCE_CMS_USERNAME - "raj@cmsworkshopmasterorg.demo"
-    aud: cmsAUD, //YOUR_AUDIENCE - "https://login.salesforce.com"
+    sub: cmsUSER, //SALESFORCE_CMS_USERNAME 
+    aud: cmsAUD, //YOUR_AUDIENCE - https://login.salesforce.com or https://test.salesforce.com
     privateKey: privateKey //PrivateKey from lib/cmsserver.key if environment = development
   },
   function(error, cmstoken){
