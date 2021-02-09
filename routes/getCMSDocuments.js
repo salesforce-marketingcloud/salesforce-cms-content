@@ -71,6 +71,12 @@ function getCMSContent(req, res){
                   thumburl: obj.thumbUrl.value,
                   contentType: contentType
                   });
+                }else if(obj[p].fileName === null && obj[p].unauthenticatedUrl === null && obj[p].url!= null){
+                  cmsContentObj.push({title: obj.title.value,
+                  url: obj[p].url,
+                  thumburl: obj.thumbUrl.value,
+                  contentType: contentType
+                  });
                 } 
               }
             }
