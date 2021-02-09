@@ -18,11 +18,11 @@
       "description": "Number of results to return, maximum 100.",
       "value": "25"
     },
-    "cmsUSER": {
+    "cmsUser": {
       "description": "Enter the Salesforce CMS Username.",
       "value": ""
     },
-    "cmsAUDIENCE": {
+    "cmsAudience": {
       "description": "Enter the Salesforce login URL - https://login.salesforce.com or https://test.salesforce.com.",
       "value": "https://login.salesforce.com"
     }
