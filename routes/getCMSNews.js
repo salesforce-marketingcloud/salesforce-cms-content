@@ -58,6 +58,7 @@ function getCMSContent(req, res){
         if(channelResource){
           results = JSON.parse(body);
           var cmsContentObj = [];
+          console.log('RESULTS LENGTH: '+results.items.length);
           for(var x=0; x<results.items.length; x++){
             var obj = results.items[x].contentNodes;
             //set excerpt and body if null/undefined
