@@ -23,10 +23,10 @@
 * Fill out the environment variables
 	* channelID - Enter the Salesforce CMS channelID 
   * clientID - Enter the Consumer Key from your Connected App
+  * cmsAudience - Enter the Salesforce login URL - https://login.salesforce.com or https://test.salesforce.com
+  * cmsUser - Enter the Salesforce CMS Username
   * limit - Enter the number of CMS records to display (default is 25, max 100)
   * privateKey - Copy and paste the contents of the server.key file
-  * cmsUSER - Enter the Salesforce CMS Username
-  * cmsAUDIENCE - Enter the Salesforce login URL - https://login.salesforce.com or https://test.salesforce.com
 * Create an Installed Package and add a component type of Custom Content Block. Use the Heroku app URL as the Endpoint URL when configuring this component.
 
 
