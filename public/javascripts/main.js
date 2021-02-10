@@ -32,7 +32,7 @@ function getCMSDocuments() {
         $("#cms-images").append('<div class="slds-box slds-theme--error"><strong>Error : </strong>CMS Channel does not exist</div>');
       }else{
         $.each(JSON.parse(data), function(key, value) {
-          $("#cms-images").append('<div class="slds-col slds-size_1-of-3"><a href="'+value.url+'"<img class="slds-p-around_xxx-small grow" contentType="'+value.contentType+'" link="'+value.url+'" sdkimg = "' + value.thumburl + '" src="' + value.thumburl + '" title="'+value.title+'" style="width:128px;height:80px;"></a><div class="slds-line-clamp_small">'+value.title+'</div></div>');
+          $("#cms-images").append('<div class="slds-col slds-size_1-of-3"><a href="'+value.url+'>"<img class="slds-p-around_xxx-small grow" contentType="'+value.contentType+'" link="'+value.url+'" sdkimg = "' + value.thumburl + '" src="' + value.thumburl + '" title="'+value.title+'" style="width:128px;height:80px;"></a><div class="slds-line-clamp_small">'+value.title+'</div></div>');
         })
         $('#cms-images>div>img').css('cursor', 'pointer');
       }
