@@ -1,10 +1,8 @@
 var cmsImageErrorStatus, cmsImageErrorText, searchTerm, link, width, height, scale, alignment, imageurl, title, htmlBody, contentType;
 
-//$(document).ready(getTrending); //.ready deprecated
-$(function() {
-  // Handler for .ready() called.
-  //getCMSImages();
-});
+//$(function() {
+  // Handler for .ready() 
+//});
 
 function getCMSImages() {
   $.get('/getCMSImages/', function(data) {})
@@ -118,7 +116,6 @@ function setImage() {
 
   //does user want the image to scale? - include a href or exclude based on link value
   if (scale === "yes" && link !='') {
-    //sdk.setContent('<div style="text-align: ' + alignment + ';"> <a href="' + link + '"><img style="width: 100%" src="' + imageurl + '" /></a></div>');
     sdk.setContent('<div style="font-size: 0.85rem !important;font-family:Helvetica,Arial,sans-serif !important;text-align: ' + alignment + ';"> <a href="' + link + '"><img style="width: 100%" src="' + imageurl + '" /></a><br>'+title+'<br><br>'+htmlBody+'</div>');
   } else if (scale === "yes" && link ==='') {
     sdk.setContent('<div style="font-size: 0.85rem !important;font-family:Helvetica,Arial,sans-serif !important;text-align: ' + alignment + ';"><img style="width: 100%" src="' + imageurl + '" /><br>'+title+'<br><br>'+htmlBody+'</div>');

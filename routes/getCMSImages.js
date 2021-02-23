@@ -10,7 +10,7 @@ var environment = process.env.NODE_ENV || 'development';
 var channelID = process.env.channelID || '0ap3h000000LlA6AAK';
 var envprivateKey;
 var cmsUSER = process.env.cmsUser || 'cmsuser@cms.demo'; //Salesforce CMS Username 
-var cmsAUD = process.env.cmsAudience || 'https://login.salesforce.com';
+var instanceURL = process.env.instanceUrl || 'https://login.salesforce.com';
 var contentType = 'cms_image';
 
 if(environment === 'development'){
@@ -89,7 +89,7 @@ function getCMSAccessToken(callback){
   var cmstoken = jwt.getToken({  
     iss: clientID, //YOUR_CONNECTED_APP_CLIENT_ID
     sub: cmsUSER, //SALESFORCE_CMS_USERNAME
-    aud: cmsAUD, //YOUR_AUDIENCE - https://login.salesforce.com or https://test.salesforce.com
+    aud: instanceURL, //YOUR_AUDIENCE - https://login.salesforce.com or https://test.salesforce.com
     privateKey: privateKey //PrivateKey from lib/cmsserver.key if environment = development
   },
   function(error, cmstoken){
