@@ -1,5 +1,5 @@
 
-# Content Builder SDK - Salesforce CMS Selector
+# Content Builder Block SDK - Salesforce CMS Selector
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/7657958/103909133-533fa900-50d1-11eb-803d-d94c0f463579.png">
@@ -7,7 +7,7 @@
 
 ## App Overview
 
-* This SDK app provides a way select a Salesforce CMS Content Types, select a CMS asset, take additional input from the block, and render the CMS asset in the email.
+* This Content Builder Block SDK app provides a way select a Salesforce CMS Content Types, select a CMS asset, take additional input from the block, and render the CMS asset in the email.
 
 ## &#x1f6d1; STOP
 [Download the step-by-step guide and complete the Integration Steps](https://salesforce.quip.com/ic1PAduK3Y76) - How to integrate Salesforce CMS with Marketing Cloud Content Builder before deploying this App
