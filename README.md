@@ -9,8 +9,8 @@
 
 * This SDK app provides a way select a Salesforce CMS Content Types, select a CMS asset, take additional input from the block, and render the CMS asset in the email.
 
-## &#x1f6d1; STOP 
-[Download the step-by-step guide] (https://salesforce.quip.com/ic1PAduK3Y76) - How to integrate Salesforce CMS with Marketing Cloud Content Builder before deploying this App
+## &#x1f6d1; STOP
+![Download the step-by-step guide] (https://salesforce.quip.com/ic1PAduK3Y76) - How to integrate Salesforce CMS with Marketing Cloud Content Builder before deploying this App
 
 ## Code Overview
 * The application was written in Node.js. Express is used as the framework with [EJS](https://github.com/mde/ejs) as the view engine. Leveraged [Salesforce Lightning Design System](https://github.com/salesforce-ux/design-system) for the User Interface, and [Salesforce Marketing Cloud Block SDK](https://github.com/salesforce-marketingcloud/blocksdk) for interacting with Content Builder.
