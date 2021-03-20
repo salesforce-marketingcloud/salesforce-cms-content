@@ -2,7 +2,7 @@
 
 ## App Overview
 
-This SDK app provides a way select a Salesforce CMS image, take additional input from the block, and render the image in the email.
+This SDK app provides a way to select a Salesforce CMS image, take additional input from the block, and render the image in the email.
 
 ![Custom Block](./docs/custom-block.png)
 
