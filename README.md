@@ -36,8 +36,8 @@ This Content Block SDK app provides a way to select a Salesforce CMS content bas
 
 ### Create a headless Marketing Cloud channel in Salesforce CMS for integration with Marketing Cloud
 
-1. From the Salesforce App Launcher, open Salesforce CMS
-2. From the CMS Home tab, select **CMS Channels**
+1. From the Salesforce App Launcher, open Digital Experiences
+2. From the Digital Experiences Home tab, select **CMS Channels**
 3. Click **Add Channel** | **Create Channel**
 4. Name the channel: **Marketing Channel**
 5. Select the connection type: **Public**
@@ -58,12 +58,12 @@ You can use the content in a public channel for emails, websites, custom apps, a
 
 ### Author Content in Salesforce CMS Workspace
 
-1. In the Salesforce CMS app, open the workspace associated with the public channel: **Marketing Channel**. Click **Add Content**
+1. In the Digital Experiences app, open the workspace associated with the public channel: **Marketing Channel**. Click **Add Content**
 2. Select the content type: **Document, Image, or News**. Then click **Create**
 3. Fill in the fields. Click **Save Draft** when finished
 4. Click **Publish**
 
-Here’s how your new content in Salesforce CMS should look. Your content is now ready for sending in an email marketing campaign.
+Here’s how your new content in Digital Experiences should look. Your content is now ready for sending in an email marketing campaign.
 
 ![Create CMS content](./docs/create-cms-content.gif)
 
@@ -126,13 +126,13 @@ You should now have the server.crt, server.csr, and server.key files created. Th
 ### Create a User account
 
 1. Create a new Salesforce User called **CMS User** | Assign the **Standard User** Profile | **Save**
-2. Open Salesforce CMS from the App Launcher and select the workspace associated with the **Marketing Channel**
+2. Open Digital Experiences from the App Launcher and select the workspace associated with the **Marketing Channel**
 3. Select **Contributors** and click **Add Contributors**.
 4. Search for and select the **CMS User | Next |** Assign the **Content Admin** role | **Finish**
 
 ### Create a Connected App
 
-To access the content created in Salesforce CMS via API for a seamless integration, [Create a connected App,](https://help.salesforce.com/articleView?id=connected_app_create.htm&type=5) which allows invocation of the Salesforce API via OAuth from a NodeJS App hosted on Heroku.
+To access the content created in Digital Experiences via API for a seamless integration, [Create a connected App,](https://help.salesforce.com/articleView?id=connected_app_create.htm&type=5) which allows invocation of the Salesforce API via OAuth from a NodeJS App hosted on Heroku.
 
 1. From Setup, enter App Manager in the Quick Find box, then select **App Manager**
 2. Click **New Connected App**
